@@ -3,6 +3,7 @@
 ***
 
 **Design Document**
+
 Aidan Kovacic, Joseph Schmidt, Jamal Brown, Austin Garrison, Kyler Severance
 
 ***
