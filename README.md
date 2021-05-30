@@ -177,7 +177,12 @@ As a user interested in 3D printing, I want to be able to view a summary of my f
 
 
 ## Class Diagram
-***A diagram goes here***
+![image](https://user-images.githubusercontent.com/53841425/120123214-8d424200-c17b-11eb-92f1-7016c5ccfb3f.png)
+* Model: Class assigned to each Model created. Allows the user to create, edit and delete models
+* Artist: Class to assign the model class an artist
+* Brand: Class used in the Matieral and Printer class to assign Brand Names
+* Printer: Class to print model and type of material used
+* Material: Class to identify the type of material used in the model and the cost to print
 
 ## Scrum Roles
 **Product Owner/Scrum Master** - Joseph Schmidt
