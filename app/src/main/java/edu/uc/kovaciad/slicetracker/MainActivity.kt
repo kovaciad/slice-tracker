@@ -1,32 +1,15 @@
 package edu.uc.kovaciad.slicetracker
 
-import android.R
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.StrictMode
-import android.os.StrictMode.ThreadPolicy
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import edu.uc.kovaciad.slicetracker.ui.main.MainFragment
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.SQLException
 
 
 class MainActivity : AppCompatActivity() {
 
     //Connection information to my database
     //Schema IT3048C
-    val ip = "173.248.174.34"
-    val port = "1533"
-    val Classes = "net.sourceforge.jtds.jdbc.Driver"
-    val database = "personaldatabase"
-    val username = "webapplication"
-    val password = "I@mtheW@lrus1"
-    val url = "jdbc:jtds:sqlserver://$ip:$port/$database"
 
-    val connection : Connection = null
+    val sqlInstance = SQLInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,19 +30,7 @@ class MainActivity : AppCompatActivity() {
 //        )
 //        textView = findViewById<View>(R.id.textView)
 //
-//        val policy = ThreadPolicy.Builder().permitAll().build()
-//        StrictMode.setThreadPolicy(policy)
-//        try {
-//            Class.forName(Classes)
-//            connection = DriverManager.getConnection(url, username, password)
-//            textView.setText("SUCCESS")
-//        } catch (e: ClassNotFoundException) {
-//            e.printStackTrace()
-//            textView.setText("ERROR")
-//        } catch (e: SQLException) {
-//            e.printStackTrace()
-//            textView.setText("FAILURE")
-//        }
+//
     }
 
 
