@@ -4,6 +4,8 @@ import java.sql.Connection
 import java.sql.DriverManager
 import android.util.Log
 
+// We should honestly change how we're doing this. Doing it this way is exploitable.
+// We need a web API to interact with the database instead.
 class SQLInstance {
     private val ip = "173.248.174.34"
     private val port = "1533"
@@ -17,7 +19,6 @@ class SQLInstance {
     var connection: Connection? = null
         get() {
             return _connection
-
         }
 
     var sqlThread = Thread( {

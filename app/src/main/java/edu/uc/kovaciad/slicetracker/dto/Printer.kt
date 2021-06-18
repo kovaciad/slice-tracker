@@ -1,12 +1,16 @@
 package edu.uc.kovaciad.slicetracker.dto
 
-data class Printer (var name: String, var type: String, var brand: Brand) {
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class Printer (@PrimaryKey val pid: Int,
+                    @ColumnInfo(name = "name") var name: String,
+                    @ColumnInfo(name = "type") var type: Int,
+                    @ColumnInfo(name = "brand") var brandId: Int,
+                    @ColumnInfo(name = "url") var url: String) {
     override fun toString(): String {
-        return "$name, $type, $brand"
-    }
-    fun editPrinter(name: String = this.name, type: String = this.type, brand: Brand = this.brand) {
-        this.name = name
-        this.type = type
-        this.brand = brand
+        return "$name, $type, $brandId, $url"
     }
 }
