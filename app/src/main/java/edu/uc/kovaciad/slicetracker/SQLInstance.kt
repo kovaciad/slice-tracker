@@ -6,7 +6,10 @@ import android.util.Log
 
 // We should honestly change how we're doing this. Doing it this way is exploitable.
 // We need a web API to interact with the database instead.
-class SQLInstance {
+
+// Changed to object so that it could be static. We only want one of these or things will
+// get real bad real fast
+object SQLInstance {
     private val ip = "173.248.174.34"
     private val port = "1533"
     private val Classes = "net.sourceforge.jtds.jdbc.Driver"
@@ -20,8 +23,7 @@ class SQLInstance {
         get() {
             return _connection
         }
-
-    var sqlThread = Thread( {
+    var sqlThread = Thread {
         run() {
             try {
                 Class.forName(Classes)
@@ -31,5 +33,5 @@ class SQLInstance {
                 Log.d("SQL", e.toString())
             }
         }
-    })
+    }
 }
