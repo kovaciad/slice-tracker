@@ -3,12 +3,9 @@ package edu.uc.kovaciad.slicetracker
 import java.sql.Connection
 import java.sql.DriverManager
 import android.util.Log
+import java.sql.SQLException
 
-// We should honestly change how we're doing this. Doing it this way is exploitable.
-// We need a web API to interact with the database instead.
-
-// Changed to object so that it could be static. We only want one of these or things will
-// get real bad real fast
+// TODO: Replace this with retrofit. This won't work
 object SQLInstance {
     private val ip = "173.248.174.34"
     private val port = "1533"
@@ -17,21 +14,27 @@ object SQLInstance {
     private val username = "webapplication"
     private val password = "I@mtheW@lrus1"
     private val url = "jdbc:jtds:sqlserver://$ip:$port/$database"
+    private lateinit var _connection: Connection
 
-    private var _connection : Connection? = null
-    var connection: Connection? = null
+    // Protect _connection from ever being changed by not having a setter
+    var connection: Connection = _connection
         get() {
             return _connection
         }
-    var sqlThread = Thread {
-        run() {
-            try {
-                Class.forName(Classes)
-                _connection = DriverManager.getConnection(url, username, password)
-                Log.d("SQL", "Connection Success")
-            } catch (e: Exception) {
-                Log.d("SQL", e.toString())
-            }
+
+    fun createSQLConnection() {
+        try {
+            Class.forName(Classes).newInstance()
+            _connection = DriverManager.getConnection(url, username, password)
+            Log.d("SQL", "Connection Success")
+        } catch (e: SQLException) {
+            Log.d("SQL", "SQL Failure")
+            e.printStackTrace()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
+
+
+
 }

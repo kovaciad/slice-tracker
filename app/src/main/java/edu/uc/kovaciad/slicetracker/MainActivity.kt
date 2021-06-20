@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sqlInstance.createSQLConnection()
         // TODO: Update data in a coroutine for faster startup
         updateData(sqlInstance)
 //        setContentView(R.layout.main_activity)
@@ -41,8 +42,9 @@ class MainActivity : AppCompatActivity() {
             applicationContext,
             SliceDatabase::class.java, "brand-db"
         ).build()
-        DataUpdate.updateBrands(sqlInstance, db)
-        DataUpdate.updatePrinters(sqlInstance, db)
-        DataUpdate.updateModels(sqlInstance, db)
+        DataUpdate.updateBrands(db)
+        DataUpdate.updatePrinters(db)
+        DataUpdate.updateModels(db)
+        db.close() // If you aren't able to get dropdown data, try removing this
     }
 }

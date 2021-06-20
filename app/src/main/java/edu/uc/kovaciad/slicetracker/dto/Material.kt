@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey
  * @param color: Color of filament. Uses android color ints
  * @param amount: Amount of filament in g or L
  */
-@Entity
+@Entity(tableName = "material")
 data class Material (@PrimaryKey var mid: Int,
                      @ColumnInfo(name = "name") var name: String,
                      @ColumnInfo(name = "type") var type: Int,

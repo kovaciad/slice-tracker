@@ -1,10 +1,12 @@
 package edu.uc.kovaciad.slicetracker.dao
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import edu.uc.kovaciad.slicetracker.dto.Brand
 
+@Dao
 interface IBrandDAO {
     @Query("SELECT * FROM brand")
     fun getAll(): List<Brand>
@@ -17,4 +19,5 @@ interface IBrandDAO {
 
     @Delete
     fun deleteBrand(brand: Brand)
+
 }

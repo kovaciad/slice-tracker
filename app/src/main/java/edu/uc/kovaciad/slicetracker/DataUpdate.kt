@@ -9,9 +9,10 @@ import java.sql.SQLException
 
 object DataUpdate {
 
-    fun updateBrands(sqlInstance: SQLInstance, db: SliceDatabase) {
+    fun updateBrands(db: SliceDatabase) {
+
         try {
-            val statement = sqlInstance.connection!!.createStatement()
+            val statement = SQLInstance.connection.createStatement()
             val brandRS = statement?.executeQuery("SELECT * FROM IT3048C.PrintingBrand")
             do {
                 val bid: Int = brandRS!!.getInt(1)
@@ -27,8 +28,8 @@ object DataUpdate {
         }
     }
 
-    fun updatePrinters(sqlInstance: SQLInstance, db: SliceDatabase) {
-        val statement = sqlInstance.connection!!.createStatement()
+    fun updatePrinters(db: SliceDatabase) {
+        val statement = SQLInstance.connection.createStatement()
         val printerRS = statement?.executeQuery("SELECT * FROM IT3048C.Printer")
         do {
             val pid: Int = printerRS!!.getInt(1)
@@ -44,22 +45,20 @@ object DataUpdate {
         } while (printerRS!!.next())
     }
 
-    fun updateModels(sqlInstance: SQLInstance, db: SliceDatabase): String {
-        lateinit var unitTestResult: String
-        val statement = sqlInstance.connection!!.createStatement()
+    fun updateModels(db: SliceDatabase) {
+        val statement = SQLInstance.connection.createStatement()
         val modelRS = statement?.executeQuery("SELECT * FROM IT3048C.Model")
         do {
             val mid: Int = modelRS!!.getInt(1)
             val name: String = modelRS.getString(2)
             val url: String = modelRS.getString(3)
             // val artist: Int = modelRS.getInt(4)
-            unitTestResult = name
 
             val model = Model(mid, name, url)
 
             val modelDao = db.modelDao()
             modelDao.insertModel(model)
         } while (modelRS!!.next())
-        return unitTestResult
     }
+
 }

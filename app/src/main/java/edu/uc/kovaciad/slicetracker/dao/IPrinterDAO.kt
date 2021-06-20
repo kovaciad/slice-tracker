@@ -1,15 +1,14 @@
 package edu.uc.kovaciad.slicetracker.dao
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import edu.uc.kovaciad.slicetracker.dto.Printer
 
+@Dao
 interface IPrinterDAO {
-    @Query("SELECT * FROM printer")
+    @Query("SELECT * FROM printers")
     fun getAll(): List<Printer>
 
-    @Query("SELECT * FROM printer WHERE name LIKE :name")
+    @Query("SELECT * FROM printers WHERE name LIKE :name")
     fun findByName(name: String): Printer
 
     @Insert
@@ -17,4 +16,5 @@ interface IPrinterDAO {
 
     @Delete
     fun deletePrinter(printer: Printer)
+
 }
