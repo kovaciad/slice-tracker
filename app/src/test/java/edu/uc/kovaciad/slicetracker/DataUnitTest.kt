@@ -18,7 +18,7 @@ class DataUnitTest {
      * Look for last name in the SQL Table
      * FIXME: Test is currently broken. Function needs context
      */
-    @Test
+//    @Test
 //    fun doesUpdateModelGetLastModel() {
 //        val lastString = DataUpdate.updateModels(sqlInstance, db)
 //        // Log.d("DEBUG", lastString)
