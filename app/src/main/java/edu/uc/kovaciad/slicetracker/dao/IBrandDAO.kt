@@ -1,5 +1,6 @@
 package edu.uc.kovaciad.slicetracker.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -9,7 +10,7 @@ import edu.uc.kovaciad.slicetracker.dto.Brand
 @Dao
 interface IBrandDAO {
     @Query("SELECT * FROM brand")
-    fun getAll(): List<Brand>
+    fun getAll(): ArrayList<Brand>
 
     @Query("SELECT * FROM brand WHERE name LIKE :name")
     fun findByName(name: String): Brand

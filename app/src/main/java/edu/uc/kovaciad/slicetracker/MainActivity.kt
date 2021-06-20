@@ -1,23 +1,32 @@
 package edu.uc.kovaciad.slicetracker
 
+import android.app.slice.Slice
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import edu.uc.kovaciad.slicetracker.dao.SliceDatabase
+import edu.uc.kovaciad.slicetracker.dto.Brand
 
 
 class MainActivity : AppCompatActivity() {
 
-    //Connection information to my database
-    //Schema IT3048C
+    companion object {
+        var db : SliceDatabase? = null
+        fun getDatabase(): SliceDatabase? {
+            return db
+        }
+    }
 
-    val sqlInstance = SQLInstance
+//    val sqlInstance = SQLInstance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sqlInstance.createSQLConnection()
-        // TODO: Update data in a coroutine for faster startup
-        updateData(sqlInstance)
+//        sqlInstance.createSQLConnection()
+        db = Room.databaseBuilder(
+            applicationContext,
+            SliceDatabase::class.java, "main-db"
+        ).build()
+//        updateData(sqlInstance)
 //        setContentView(R.layout.main_activity)
 //        if (savedInstanceState == null) {
 //            supportFragmentManager.beginTransaction()
@@ -37,14 +46,10 @@ class MainActivity : AppCompatActivity() {
 //
     }
 
-    fun updateData(sqlInstance: SQLInstance) {
-        val db = Room.databaseBuilder(
-            applicationContext,
-            SliceDatabase::class.java, "brand-db"
-        ).build()
-        DataUpdate.updateBrands(db)
-        DataUpdate.updatePrinters(db)
-        DataUpdate.updateModels(db)
-        db.close() // If you aren't able to get dropdown data, try removing this
-    }
+//    fun updateData() {
+//
+//        DataUpdate.updateBrands(db)
+//        DataUpdate.updatePrinters(db)
+//        DataUpdate.updateModels(db)
+//    }
 }

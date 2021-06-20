@@ -21,6 +21,6 @@ data class Material (@PrimaryKey var mid: Int,
                      @ColumnInfo(name = "color") var color: Int,
                      @ColumnInfo(name = "amount") var amount: Double) {
     override fun toString(): String {
-        return "$name, $type, $brandId, $color, $amount"
+        return name
     }
 }

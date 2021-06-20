@@ -9,6 +9,6 @@ data class Model (@PrimaryKey var mid: Int,
                   @ColumnInfo(name = "name")var name: String,
                   @ColumnInfo(name = "url")var url: String) {
     override fun toString(): String {
-        return "$name, $url"
+        return name
     }
 }

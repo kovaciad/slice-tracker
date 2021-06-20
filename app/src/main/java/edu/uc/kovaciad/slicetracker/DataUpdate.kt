@@ -7,6 +7,7 @@ import edu.uc.kovaciad.slicetracker.dto.Model
 import edu.uc.kovaciad.slicetracker.dto.Printer
 import java.sql.SQLException
 
+// TODO: Sprint 2: Replace all SQL references with JSON
 object DataUpdate {
 
     fun updateBrands(db: SliceDatabase) {

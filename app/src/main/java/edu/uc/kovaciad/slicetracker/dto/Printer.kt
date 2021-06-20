@@ -12,6 +12,6 @@ data class Printer (@PrimaryKey val pid: Int,
                     @ColumnInfo(name = "url") var url: String)
 {
     override fun toString(): String {
-        return "$name, $type, $brandId, $url"
+        return name
     }
 }
