@@ -10,22 +10,13 @@ import edu.uc.kovaciad.slicetracker.dto.Brand
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        var db : SliceDatabase? = null
-        fun getDatabase(): SliceDatabase? {
-            return db
-        }
-    }
 
 //    val sqlInstance = SQLInstance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        sqlInstance.createSQLConnection()
-        db = Room.databaseBuilder(
-            applicationContext,
-            SliceDatabase::class.java, "main-db"
-        ).build()
+
 //        updateData(sqlInstance)
 //        setContentView(R.layout.main_activity)
 //        if (savedInstanceState == null) {

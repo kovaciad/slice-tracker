@@ -8,7 +8,7 @@ import edu.uc.kovaciad.slicetracker.dto.Printer
 @Dao
 interface IMaterialDAO {
     @Query("SELECT * FROM material")
-    fun getAll(): ArrayList<Material>
+    fun getAll(): LiveData<List<Material>>
 
     @Query("SELECT * FROM material WHERE name LIKE :name")
     fun findByName(name: String): Material

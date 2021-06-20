@@ -11,7 +11,7 @@ import edu.uc.kovaciad.slicetracker.dto.Printer
 @Dao
 interface IModelDAO {
     @Query("SELECT * FROM Model")
-    fun getAll(): ArrayList<Model>
+    fun getAll(): LiveData<List<Model>>
 
     @Query("SELECT * FROM Model WHERE name LIKE :name")
     fun findByName(name: String): Model

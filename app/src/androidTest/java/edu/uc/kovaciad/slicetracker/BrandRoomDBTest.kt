@@ -15,29 +15,29 @@ import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
 class SimpleEntityReadWriteTest {
-    private lateinit var brandDao: IBrandDAO
-    private val context = ApplicationProvider.getApplicationContext<Context>()
-    private var db: SliceDatabase = Room.inMemoryDatabaseBuilder(
-        context, SliceDatabase::class.java
-    ).build()
-    private lateinit var ma: MainActivity
-
-    @Before
-    fun createDb() {
-        brandDao = db.brandDao()
-    }
-
-    @After
-    @Throws(IOException::class)
-    fun closeDb() {
-        db.close()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun updateAndReadDB() {
-        DataUpdate.updateBrands(db)
-        val brandList = brandDao.getAll()
-        assertEquals(brandList[0], "Elegoo")
-    }
+//    private lateinit var brandDao: IBrandDAO
+//    private val context = ApplicationProvider.getApplicationContext<Context>()
+//    private var db: SliceDatabase = Room.inMemoryDatabaseBuilder(
+//        context, SliceDatabase::class.java
+//    ).build()
+//    private lateinit var ma: MainActivity
+//
+//    @Before
+//    fun createDb() {
+//        brandDao = db.brandDao()
+//    }
+//
+//    @After
+//    @Throws(IOException::class)
+//    fun closeDb() {
+//        db.close()
+//    }
+//
+//    @Test
+//    @Throws(Exception::class)
+//    fun updateAndReadDB() {
+//        DataUpdate.updateBrands(db)
+//        val brandList = brandDao.getAll()
+//        assertEquals(brandList[0], "Elegoo")
+//    }
 }
