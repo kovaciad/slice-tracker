@@ -16,17 +16,7 @@ import java.sql.SQLException
 
 class MainActivity : AppCompatActivity() {
 
-    //Connection information to my database
-    //Schema IT3048C
-    val ip = "173.248.174.34"
-    val port = "1533"
-    val Classes = "net.sourceforge.jtds.jdbc.Driver"
-    val database = "personaldatabase"
-    val username = "webapplication"
-    val password = "I@mtheW@lrus1"
-    val url = "jdbc:jtds:sqlserver://$ip:$port/$database"
 
-    val connection : Connection = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
