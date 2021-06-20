@@ -1,22 +1,15 @@
 package edu.uc.kovaciad.slicetracker
 
-import android.content.Context
 import android.util.Log
-import androidx.room.Room
-import edu.uc.kovaciad.slicetracker.dao.BrandDatabase
-import edu.uc.kovaciad.slicetracker.dao.ModelDatabase
-import edu.uc.kovaciad.slicetracker.dao.PrinterDatabase
+import edu.uc.kovaciad.slicetracker.dao.SliceDatabase
 import edu.uc.kovaciad.slicetracker.dto.Brand
 import edu.uc.kovaciad.slicetracker.dto.Model
 import edu.uc.kovaciad.slicetracker.dto.Printer
 import java.sql.SQLException
 
 object DataUpdate {
-    fun updateBrands(sqlInstance: SQLInstance, context: Context) {
-        val db = Room.databaseBuilder(
-            context,
-            BrandDatabase::class.java, "brand-db"
-        ).build()
+
+    fun updateBrands(sqlInstance: SQLInstance, db: SliceDatabase) {
         try {
             val statement = sqlInstance.connection!!.createStatement()
             val brandRS = statement?.executeQuery("SELECT * FROM IT3048C.PrintingBrand")
@@ -34,11 +27,7 @@ object DataUpdate {
         }
     }
 
-    fun updatePrinters(sqlInstance: SQLInstance, context: Context) {
-        val db = Room.databaseBuilder(
-            context,
-            PrinterDatabase::class.java, "printer-db"
-        ).build()
+    fun updatePrinters(sqlInstance: SQLInstance, db: SliceDatabase) {
         val statement = sqlInstance.connection!!.createStatement()
         val printerRS = statement?.executeQuery("SELECT * FROM IT3048C.Printer")
         do {
@@ -55,12 +44,8 @@ object DataUpdate {
         } while (printerRS!!.next())
     }
 
-    fun updateModels(sqlInstance: SQLInstance, context: Context): String {
+    fun updateModels(sqlInstance: SQLInstance, db: SliceDatabase): String {
         lateinit var unitTestResult: String
-        val db = Room.databaseBuilder(
-            context,
-            ModelDatabase::class.java, "model-db"
-        ).build()
         val statement = sqlInstance.connection!!.createStatement()
         val modelRS = statement?.executeQuery("SELECT * FROM IT3048C.Model")
         do {

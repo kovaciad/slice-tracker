@@ -2,6 +2,8 @@ package edu.uc.kovaciad.slicetracker
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
+import edu.uc.kovaciad.slicetracker.dao.SliceDatabase
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,8 +37,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateData(sqlInstance: SQLInstance) {
-        DataUpdate.updateBrands(sqlInstance, applicationContext)
-        DataUpdate.updatePrinters(sqlInstance, applicationContext)
-        DataUpdate.updateModels(sqlInstance, applicationContext)
+        val db = Room.databaseBuilder(
+            applicationContext,
+            SliceDatabase::class.java, "brand-db"
+        ).build()
+        DataUpdate.updateBrands(sqlInstance, db)
+        DataUpdate.updatePrinters(sqlInstance, db)
+        DataUpdate.updateModels(sqlInstance, db)
     }
 }
