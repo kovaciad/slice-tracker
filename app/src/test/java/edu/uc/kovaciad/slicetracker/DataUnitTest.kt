@@ -9,10 +9,10 @@ import org.junit.Test
 class DataUnitTest {
     val sqlInstance = SQLInstance
 
-    val db = Room.databaseBuilder(
-        context,
-        SliceDatabase::class.java, "brand-db"
-    ).build()
+//    val db = Room.databaseBuilder(
+//        context,
+//        SliceDatabase::class.java, "brand-db"
+//    ).build()
 
     /**
      * Look for last name in the SQL Table
