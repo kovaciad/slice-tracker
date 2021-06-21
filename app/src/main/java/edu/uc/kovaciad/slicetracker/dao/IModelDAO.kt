@@ -13,7 +13,7 @@ interface IModelDAO {
     @Query("SELECT * FROM Model")
     fun getAll(): LiveData<List<Model>>
 
-    @Query("SELECT * FROM Model WHERE name LIKE :name")
+    @Query("SELECT * FROM Model WHERE modelName LIKE :name")
     fun findByName(name: String): Model
 
     @Insert

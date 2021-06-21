@@ -4,11 +4,18 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * @param mid: DB ID for dev use
+ * @param modelName: User Inputted Name
+ * @param artistId: Artist ID from Artist table
+ * @param modelUrl: model URL
+ */
 @Entity(tableName = "Model")
 data class Model (@PrimaryKey var mid: Int,
-                  @ColumnInfo(name = "name")var name: String,
-                  @ColumnInfo(name = "url")var url: String) {
+                  @ColumnInfo(name = "modelName")var modelName: String,
+                  @ColumnInfo(name = "artistId")var artistId: Int,
+                  @ColumnInfo(name = "modelUrl")var url: String) {
     override fun toString(): String {
-        return name
+        return modelName
     }
 }

@@ -4,11 +4,15 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "brand")
+/**
+ * @param bid: DB ID for dev use
+ * @param brandName: User Inputted Name
+ */
+@Entity(tableName = "Brand")
 data class Brand(@PrimaryKey val bid: Int,
-                @ColumnInfo(name = "name") val name: String,
-                @ColumnInfo(name = "url") val url: String) {
+                @ColumnInfo(name = "brandName") val brandName: String,
+                @ColumnInfo(name = "brandUrl") val url: String) {
     override fun toString(): String {
-        return name
+        return brandName
     }
 }

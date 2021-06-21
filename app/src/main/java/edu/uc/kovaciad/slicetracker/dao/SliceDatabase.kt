@@ -1,7 +1,6 @@
 package edu.uc.kovaciad.slicetracker.dao
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
+import androidx.room.*
 import edu.uc.kovaciad.slicetracker.dto.Brand
 import edu.uc.kovaciad.slicetracker.dto.Material
 import edu.uc.kovaciad.slicetracker.dto.Model
