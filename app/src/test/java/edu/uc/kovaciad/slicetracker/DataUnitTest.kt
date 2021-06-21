@@ -7,7 +7,7 @@ import junit.framework.Assert.assertEquals
 import org.junit.Test
 
 class DataUnitTest {
-    val sqlInstance = SQLInstance
+    //val sqlInstance = SQLInstance
 
 //    val db = Room.databaseBuilder(
 //        context,
