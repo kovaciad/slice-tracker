@@ -26,7 +26,7 @@ class DataUnitTest {
 //    }
 
     @Test
-    fun twoplustwo() {
+    fun twoPlusTwo() {
         assertEquals(4, 2+2)
     }
 }
