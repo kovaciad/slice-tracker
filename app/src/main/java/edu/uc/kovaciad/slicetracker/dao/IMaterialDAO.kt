@@ -10,7 +10,7 @@ interface IMaterialDAO {
     @Query("SELECT * FROM material")
     fun getAll(): LiveData<List<Material>>
 
-    @Query("SELECT * FROM material WHERE name LIKE :name")
+    @Query("SELECT * FROM material WHERE materialName LIKE :name")
     fun findByName(name: String): Material
 
     @Insert
