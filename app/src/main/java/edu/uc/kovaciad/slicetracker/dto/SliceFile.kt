@@ -1,6 +1,8 @@
 package edu.uc.kovaciad.slicetracker.dto
 
 import android.text.format.Time
+//as of api 22 Time is depreciated and it is suggested to use GregorianCalendar
+import java.util.GregorianCalendar
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -37,6 +39,7 @@ data class SliceFile (@PrimaryKey var sfid: Int,
                       @ColumnInfo(name = "resinLiftHeight") var resinLiftHeight : Int = 0,
                       @ColumnInfo(name = "numberOfLayers") var numberOfLayers : Int = 0,
                       @ColumnInfo(name = "filamentNozzleThickness") var filamentNozzleThickness : Double = 0.0,
+                      //Time should be changed with GregorianCalander (I dont want to mess up your DB so i wont make this change)
                       @ColumnInfo(name = "filamentNozzleEstimatedTime") var filamentNozzleEstimatedTime : Time,
                       @ColumnInfo(name = "filamentEstimatedMaterial") var filamentEstimatedMaterial : Double = 0.0)
 {
