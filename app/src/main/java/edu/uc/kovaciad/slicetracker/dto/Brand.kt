@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 /**
  * @param bid: DB ID for dev use
  * @param brandName: User Inputted Name
+ * @param brandUrl: Brand URL
  */
 @Entity(tableName = "Brand")
 data class Brand(@PrimaryKey val bid: Int,

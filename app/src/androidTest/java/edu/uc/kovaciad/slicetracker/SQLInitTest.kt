@@ -22,7 +22,7 @@ import java.sql.SQLException
 @RunWith(AndroidJUnit4::class)
 class SQLInitTest {
 //
-//    private lateinit var db: SliceDatabase
+//    private lateinit val db: SliceDatabase
 //    @Before
 //    fun createDb() {
 //        val context = ApplicationProvider.getApplicationContext<Context>()
