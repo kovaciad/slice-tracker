@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 /**
- * @param sfid: DB ID for dev use
+ * @param sfId: DB ID for dev use
  * @param sliceFileName: User Inputted Name
  * @param modelId: model id
  * @param materialId: material id
@@ -24,7 +24,7 @@ import kotlin.time.ExperimentalTime
  * @param filamentEstimatedMaterial: estimated amount of filament needed
  */
 @Entity(tableName = "SliceFile")
-data class SliceFile (@PrimaryKey var sfid: Int,
+data class SliceFile (@PrimaryKey var sfId: Int,
                       @ColumnInfo(name = "sliceFileName") var sliceFileName : String,
                       @ColumnInfo(name = "modelId") var modelId : Int,
                       @ColumnInfo(name = "materialId") var materialId : Int,

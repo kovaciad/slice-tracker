@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 /**
- * @param mid: DB ID for dev use
+ * @param mId: DB ID for dev use
  * @param materialName: User Inputted Name
  * @param materialTypeId: Type of material from predetermined list
  * @param brandId: Brand from brand object
@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey
  * @param materialAmount: Amount of filament in g or L
  */
 @Entity(tableName = "material")
-data class Material (@PrimaryKey var mid: Int,
+data class Material (@PrimaryKey var mId: Int,
                      @ColumnInfo(name = "materialName") var materialName: String,
                      @ColumnInfo(name = "materialTypeId") var materialTypeId: Int,
                      @ColumnInfo(name = "brandId") var brandId: Int,

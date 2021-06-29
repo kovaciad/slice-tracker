@@ -5,11 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 /**
- * @param bid: DB ID for dev use
+ * @param bId: DB ID for dev use
  * @param brandName: User Inputted Name
  */
 @Entity(tableName = "Brand")
-data class Brand(@PrimaryKey val bid: Int,
+data class Brand(@PrimaryKey val bId: Int,
                 @ColumnInfo(name = "brandName") val brandName: String,
                 @ColumnInfo(name = "brandUrl") val url: String) {
     override fun toString(): String {

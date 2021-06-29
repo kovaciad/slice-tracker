@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
     private var retrofit: Retrofit? = null
-    private val BASE_URL = "127.0.0" // TODO: Replace with our webapp (Sprint 2)
+    private const val BASE_URL = "127.0.0" // TODO: Replace with our webapp (Sprint 2)
 
     val retrofitInstance: Retrofit?
         get() {
