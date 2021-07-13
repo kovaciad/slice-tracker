@@ -10,7 +10,12 @@ import edu.uc.kovaciad.slicetracker.dto.Material
 import edu.uc.kovaciad.slicetracker.dto.Model
 import edu.uc.kovaciad.slicetracker.dto.Printer
 
-class MainViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class MainViewModel {
+    //MutableLiveData array list
+    var material: MutableLiveData<Material> = MutableLiveData<Material>()
+    var brand: MutableLiveData<Brand> = MutableLiveData<Brand>()
 
+    fun fetchProduct(myMATERIAL: String) {
+
+    }
 }

@@ -14,9 +14,21 @@ interface IMaterialDAO {
     fun findByName(name: String): Material
 
     @Insert
-    fun insertMaterial(material: Material)
-
-    @Delete
-    fun deleteMaterial(material: Material)
+    suspend fun insertMaterial(material: Material)
+    /**
+     * When updating a row with a value already set in a column,
+     * replaces the old value with the new one.
+     *
+     * @param  material new value to write
+     */
+    @Update
+    suspend fun update(material: Material)
+    /**
+     * Deletes all values from the table.
+     *
+     * This does not delete the table, only its contents.
+     */
+    @Query("DELETE FROM material")
+    suspend fun clear()
 
 }

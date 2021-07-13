@@ -7,11 +7,14 @@ import edu.uc.kovaciad.slicetracker.dao.IBrandDAO
 import org.junit.Before
 import androidx.room.Room
 import edu.uc.kovaciad.slicetracker.dao.SliceDatabase
-import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
+import androidx.test.platform.app.InstrumentationRegistry
+
 
 @RunWith(AndroidJUnit4::class)
 class SimpleEntityReadWriteTest {
