@@ -9,11 +9,11 @@ import edu.uc.kovaciad.slicetracker.dto.Brand
 
 @Dao
 interface IBrandDAO {
-    @Query("SELECT * FROM BRAND")
-    fun getAll(): LiveData<List<Brand>>
+    @Query("SELECT * FROM Brand")
+    fun getAllBrands(): LiveData<List<Brand>>
 
     @Query("SELECT * FROM Brand WHERE brandName LIKE :name")
-    fun findByName(name: String): Brand
+    fun findBrandByName(name: String): Brand
 
     @Insert
     fun insertBrand(brand: Brand)
