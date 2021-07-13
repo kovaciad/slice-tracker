@@ -11,14 +11,9 @@ import androidx.lifecycle.ViewModel
 import edu.uc.kovaciad.slicetracker.R
 
 class MainFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private lateinit var viewModel: MainViewModel
     // For whatever reason, it won't compile when I do lateinit for this, but will if I don't
-//    private lateinit var applicationViewModel: ApplicationViewModel
+    //private lateinit var applicationViewModel: ApplicationViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,5 +39,10 @@ class MainFragment : Fragment() {
         })
 
     }
+
+    companion object {
+        fun newInstance() = MainFragment()
+    }
+
 
 }

@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
  * @param materialTypeId: material type id
  * @param modelUrl: model URL
  */
-@Entity(tableName = "Printer")
+@Entity(tableName = "printer")
 data class Printer (@PrimaryKey val pid: Int,
                     @ColumnInfo(name = "printerName") var printerName: String,
                     @ColumnInfo(name = "materialTypeId") var materialTypeId: Int,
