@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 class BrandService(application: Application) {
     private val application = application
 
-    internal fun getBrandDAO(): IBrandDAO {
+    internal fun getBrandDAO(): RoomDatabase {
         val db = Room.databaseBuilder(
             application,
             SliceDatabase::class.java, "main-db"
@@ -20,13 +20,10 @@ class BrandService(application: Application) {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
 
-                    db.execSQL("INSERT INTO Brand (bid, brandName, brandURL) VALUES (1, 'Anycubic', 'www.anycubic.com')")
-                    db.execSQL("INSERT INTO Brand (bid, brandName, brandURL) VALUES (2, 'Elegoo', 'www.elegpp.com')")
-
                 }
             })
             .build()
-        return db.brandDao()
+        return db
     }
 
 }

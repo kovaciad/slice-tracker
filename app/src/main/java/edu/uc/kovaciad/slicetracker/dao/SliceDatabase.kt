@@ -2,6 +2,7 @@ package edu.uc.kovaciad.slicetracker.dao
 
 import android.content.Context
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteDatabase
 import edu.uc.kovaciad.slicetracker.dto.Brand
 import edu.uc.kovaciad.slicetracker.dto.Material
 import edu.uc.kovaciad.slicetracker.dto.Model
@@ -29,9 +30,18 @@ abstract class SliceDatabase : RoomDatabase() {
                         SliceDatabase::class.java, "SliceDatabase.db"
                     ) // Wipes and rebuilds instead of migrating
                         // if no Migration object.
+                        .addCallback(object : RoomDatabase.Callback(){
+                            override fun onCreate(db: SupportSQLiteDatabase) {
+                                super.onCreate(db)
 
+                               // db.execSQL("INSERT INTO Brand (bid, brandName, brandURL) VALUES (1, 'Anycubic', 'www.anycubic.com')")
+                                //db.execSQL("INSERT INTO Brand (bid, brandName, brandURL) VALUES (2, 'Elegoo', 'www.elegpp.com')")
+
+                            }
+                        })
                         .fallbackToDestructiveMigration()
                         .build()
+
                 }
             }
         }

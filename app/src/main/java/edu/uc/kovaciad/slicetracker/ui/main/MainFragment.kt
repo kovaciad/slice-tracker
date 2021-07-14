@@ -30,19 +30,21 @@ class MainFragment : Fragment() {
     ): View {
 
         return inflater.inflate(R.layout.main_fragment, container, false)
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        var sliceDb : SliceDatabase
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         val applicationViewModel = ViewModelProvider(this).get(ApplicationViewModel::class.java)
 
 
         // To UI Designer: This is where you'll find your AutoComplete Data. Just fill it in
-        applicationViewModel.brandService.getBrandDAO().getAllBrands().observe(viewLifecycleOwner, Observer {
+      //  applicationViewModel.brandService.getBrandDAO().getAllBrands().observe(viewLifecycleOwner, Observer {
 //                brands ->
-            Log.d(it.toString(), it.toString())
-        })
+        //    Log.d(it.toString(), it.toString())
+      //  })
         applicationViewModel.printerService.getPrinterDAO().getAll().observe(viewLifecycleOwner, Observer {
 //                printers ->
         })
