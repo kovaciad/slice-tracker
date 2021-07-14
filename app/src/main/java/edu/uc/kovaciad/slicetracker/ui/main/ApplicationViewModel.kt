@@ -2,24 +2,13 @@ package edu.uc.kovaciad.slicetracker.ui.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import edu.uc.kovaciad.slicetracker.services.BrandService
-import edu.uc.kovaciad.slicetracker.services.ModelService
-import edu.uc.kovaciad.slicetracker.services.PrinterService
+import edu.uc.kovaciad.slicetracker.services.DatabaseService
 
 class ApplicationViewModel(application: Application): AndroidViewModel(application) {
-    private var _brandService: BrandService = BrandService(application)
-    private var _modelService: ModelService = ModelService(application)
-    private var _printerService: PrinterService = PrinterService(application)
+    private var _databaseService: DatabaseService = DatabaseService(application)
 
-    internal var brandService: BrandService
-        get() {return _brandService}
-        set(value) {_brandService = value}
+    internal var databaseService: DatabaseService
+        get() {return _databaseService}
+        set(value) {_databaseService = value}
 
-    internal var modelService: ModelService
-        get() {return _modelService}
-        set(value) {_modelService = value}
-
-    internal var printerService: PrinterService
-        get() {return _printerService}
-        set(value) {_printerService = value}
 }

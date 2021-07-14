@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.room.Room
+import androidx.sqlite.db.SimpleSQLiteQuery
 import edu.uc.kovaciad.slicetracker.R
 import edu.uc.kovaciad.slicetracker.dao.SliceDatabase
 import edu.uc.kovaciad.slicetracker.dto.Brand
@@ -35,9 +36,9 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var sliceDb : SliceDatabase
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        val applicationViewModel = ViewModelProvider(this).get(ApplicationViewModel::class.java)
+      //  var sliceDb : SliceDatabase
+       // viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        //val applicationViewModel = ViewModelProvider(this).get(ApplicationViewModel::class.java)
 
 
         // To UI Designer: This is where you'll find your AutoComplete Data. Just fill it in
@@ -45,13 +46,14 @@ class MainFragment : Fragment() {
 //                brands ->
         //    Log.d(it.toString(), it.toString())
       //  })
-        applicationViewModel.printerService.getPrinterDAO().getAll().observe(viewLifecycleOwner, Observer {
-//                printers ->
-        })
+      //  var queryString : String = "SELECT * FROM Brand"
+      //  val query = SimpleSQLiteQuery(queryString)
 
-        applicationViewModel.modelService.getModelDAO().getAll().observe(viewLifecycleOwner, Observer {
+       // applicationViewModel.databaseService.getRoomDB().queryExecutor.query(query)
+
+       // applicationViewModel.modelService.getModelDAO().getAll().observe(viewLifecycleOwner, Observer {
 //                models ->
-        })
+       // })
 
 
     }

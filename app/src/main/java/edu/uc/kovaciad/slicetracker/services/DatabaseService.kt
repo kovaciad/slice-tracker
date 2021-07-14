@@ -4,14 +4,13 @@ import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import edu.uc.kovaciad.slicetracker.dao.IBrandDAO
 import edu.uc.kovaciad.slicetracker.dao.SliceDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-class BrandService(application: Application) {
+class DatabaseService(application: Application) {
     private val application = application
 
-    internal fun getBrandDAO(): RoomDatabase {
+    internal fun getRoomDB(): RoomDatabase {
         val db = Room.databaseBuilder(
             application,
             SliceDatabase::class.java, "main-db"
