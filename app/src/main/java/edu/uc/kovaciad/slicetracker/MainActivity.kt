@@ -11,7 +11,6 @@ import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import edu.uc.kovaciad.slicetracker.services.DatabaseService
 
 
 class MainActivity : AppCompatActivity() {
