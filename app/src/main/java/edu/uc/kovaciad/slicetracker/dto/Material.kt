@@ -1,10 +1,5 @@
 package edu.uc.kovaciad.slicetracker.dto
 
-import android.graphics.Color
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
 /**
  * @param id: DB ID for dev use
  * @param materialName: User Inputted Name
