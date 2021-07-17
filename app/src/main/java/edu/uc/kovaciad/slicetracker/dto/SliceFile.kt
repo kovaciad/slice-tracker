@@ -1,11 +1,9 @@
 package edu.uc.kovaciad.slicetracker.dto
 
-import android.text.format.Time
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
+
 /**
  * @param sfid: DB ID for dev use
  * @param sliceFileName: User Inputted Name
@@ -37,7 +35,7 @@ data class SliceFile (@PrimaryKey var sfid: Int,
                       @ColumnInfo(name = "resinLiftHeight") var resinLiftHeight : Int = 0,
                       @ColumnInfo(name = "numberOfLayers") var numberOfLayers : Int = 0,
                       @ColumnInfo(name = "filamentNozzleThickness") var filamentNozzleThickness : Double = 0.0,
-                      @ColumnInfo(name = "filamentNozzleEstimatedTime") var filamentNozzleEstimatedTime : Time,
+                      @ColumnInfo(name = "filamentNozzleEstimatedTime") var filamentNozzleEstimatedTime : Double,
                       @ColumnInfo(name = "filamentEstimatedMaterial") var filamentEstimatedMaterial : Double = 0.0)
 {
     override fun toString(): String {
