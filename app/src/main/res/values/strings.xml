@@ -2,4 +2,8 @@
     <string name="app_name">Slice Tracker</string>
     <string name="login">Sign In</string>
     <string name="signOut">Sign Out</string>
+    <string name="overview">Slice Overview</string>
+    <string name="statsOverview">The Numbers</string>
+    <string name="totalTime">Total Print Time: %1$s minutes</string>
+    <string name="totalMats">Total Materials: %1$s g</string>
 </resources>

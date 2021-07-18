@@ -3,6 +3,7 @@ package edu.uc.kovaciad.slicetracker
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import edu.uc.kovaciad.slicetracker.ui.main.MainFragment
 import edu.uc.kovaciad.slicetracker.ui.main.MainViewModel
+import edu.uc.kovaciad.slicetracker.ui.main.OverviewFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var detector: GestureDetectorCompat
     private var user: FirebaseUser? = null
     private lateinit var mainFragment: MainFragment
+    private lateinit var overviewFragment: Fragment
     private lateinit var activeFragment: Fragment
 
     private val signInLauncher = registerForActivityResult(
@@ -30,13 +33,11 @@ class MainActivity : AppCompatActivity() {
         this.onSignInResult(res)
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        mainFragment = MainFragment()
-        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        mainFragment = MainFragment.newInstance()
+        overviewFragment = OverviewFragment.newInstance()
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, mainFragment)
@@ -76,6 +77,9 @@ class MainActivity : AppCompatActivity() {
                     if (diffX < 0) {
                         // Swipe left
                         this@MainActivity.onSwipeLeft()
+                    } else {
+                        // Swipe right
+                        this@MainActivity.onSwipeRight()
                     }
                     true
                 } else {
@@ -98,12 +102,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onSwipeBottom() {
-        TODO("Not yet implemented")
+    // On swipe right, go back to main page
+    private fun onSwipeRight() {
+        if (activeFragment == overviewFragment) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, MainFragment.newInstance())
+                .commitNow()
+            activeFragment = mainFragment
+        }
     }
 
+    // On swipe left, open the overview page
     private fun onSwipeLeft() {
-        TODO("Show overview screen")
+        if (activeFragment == mainFragment) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, OverviewFragment.newInstance())
+                .commitNow()
+            activeFragment = overviewFragment
+        }
+    }
+
+    // For future use
+    private fun onSwipeBottom() {
+        Toast.makeText(applicationContext, "Swiped bottom (Will be something useful probably)", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -111,13 +132,16 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.main_menu, menu)
         // Check to see if there is an account logged in to decide what to show
         if (user != null) {
+            // User logged in
             menu!!.findItem(R.id.loginButton).isVisible = false
         } else {
+            // User not logged in
             menu!!.findItem(R.id.signOutBtn).isVisible = false
         }
         return true
     }
 
+    // Handle buttons in the top menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
         R.id.loginButton -> {
             createSignInIntent()
@@ -145,8 +169,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Sign into Firebase
     private fun createSignInIntent() {
-
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
@@ -158,6 +182,7 @@ class MainActivity : AppCompatActivity() {
         signInLauncher.launch(signInIntent)
     }
 
+    // Sign out of Firebase
     private fun signOut() {
         AuthUI.getInstance()
             .signOut(this)
