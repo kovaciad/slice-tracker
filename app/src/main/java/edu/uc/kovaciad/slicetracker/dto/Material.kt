@@ -9,11 +9,11 @@ package edu.uc.kovaciad.slicetracker.dto
  * @param materialAmount: Amount of filament in g or L
  */
 data class Material (
-            var materialName: String,
-            var materialTypeId: Int,
-            var brandId: Int,
-            var materialColor: Int,
-            var materialAmount: Double,
+            var materialName: String = "",
+            var materialTypeId: String = "",
+            var brandId: String = "",
+            var materialColor: String = "",
+            var materialAmount: Double= 0.0,
             override var id: String = ""): IData {
 
     override fun toString(): String {

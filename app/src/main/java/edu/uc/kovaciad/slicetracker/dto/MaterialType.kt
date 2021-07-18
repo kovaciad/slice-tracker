@@ -5,7 +5,7 @@ package edu.uc.kovaciad.slicetracker.dto
  * @param materialTypeName: User Inputted Name
  */
 data class MaterialType(
-            var materialTypeName : String,
+            var materialTypeName : String = "",
             override var id: String = ""): IData
 {
     override fun toString(): String {

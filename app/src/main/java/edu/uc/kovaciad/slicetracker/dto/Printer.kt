@@ -9,9 +9,9 @@ package edu.uc.kovaciad.slicetracker.dto
  * @param printerUrl: model URL
  */
 data class Printer (
-            var printerName: String,
-            var materialTypeId: String,
-            var brandId: String,
+            var printerName: String = "",
+            var materialTypeId: String = "",
+            var brandId: String = "",
             var printerUrl: String? = null,
             override var id: String = ""): IData
 {

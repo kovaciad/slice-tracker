@@ -7,8 +7,8 @@ package edu.uc.kovaciad.slicetracker.dto
  * @param url: model URL
  */
 data class Model (
-            var modelName: String,
-            var artistId: Int,
+            var modelName: String = "",
+            var artistId: String = "",
             var url: String? = null,
             override var id: String = ""): IData {
 

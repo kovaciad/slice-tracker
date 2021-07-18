@@ -19,9 +19,9 @@ package edu.uc.kovaciad.slicetracker.dto
  * @param filamentEstimatedMaterial: estimated amount of filament needed
  */
 data class SliceFile (
-                      var sliceFileName : String,
-                      var modelId : String,
-                      var materialId : String,
+                      var sliceFileName : String = "",
+                      var modelId : String = "",
+                      var materialId : String = "",
                       var resinBaseLayers : Int = 0,
                       var resinBaseLayerCureTime : Int = 0,
                       var resinLayerThickness : Double = 0.0,
@@ -31,7 +31,7 @@ data class SliceFile (
                       var resinLiftHeight : Int = 0,
                       var numberOfLayers : Int = 0,
                       var filamentNozzleThickness : Double = 0.0,
-                      var filamentNozzleEstimatedTime : Double,
+                      var filamentNozzleEstimatedTime : Double = 0.0,
                       var filamentEstimatedMaterial : Double = 0.0,
                       override var id: String = ""): IData
 {
