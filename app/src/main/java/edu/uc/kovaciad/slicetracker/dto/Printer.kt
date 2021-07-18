@@ -1,21 +1,19 @@
 package edu.uc.kovaciad.slicetracker.dto
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+
 /**
- * @param pid: DB ID for dev use
+ * @param id: DB ID for dev use
  * @param printerName: User Inputted Name
  * @param brandId: Brand ID
  * @param materialTypeId: material type id
- * @param modelUrl: model URL
+ * @param printerUrl: model URL
  */
-@Entity(tableName = "Printer")
-data class Printer (@PrimaryKey val pid: Int,
-                    @ColumnInfo(name = "printerName") var printerName: String,
-                    @ColumnInfo(name = "materialTypeId") var materialTypeId: Int,
-                    @ColumnInfo(name = "brandId") var brandId: Int = 0,
-                    @ColumnInfo(name = "printerUrl") var printerUrl: String)
+data class Printer (
+            var printerName: String = "",
+            var materialTypeId: String = "",
+            var brandId: String = "",
+            var printerUrl: String? = null,
+            override var id: String = ""): IData
 {
     override fun toString(): String {
         return printerName

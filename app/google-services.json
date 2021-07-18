@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "656601127441",
+    "project_id": "slice-tracker",
+    "storage_bucket": "slice-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656601127441:android:8b321abf48815a14a12fb0",
+        "android_client_info": {
+          "package_name": "edu.uc.kovaciad.slicetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656601127441-pah3tecfq97m7nghb5ef43lahnl3a8mp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcES1NOCLS4pHImRElojMFyl2q0vD-cM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656601127441-pah3tecfq97m7nghb5ef43lahnl3a8mp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
