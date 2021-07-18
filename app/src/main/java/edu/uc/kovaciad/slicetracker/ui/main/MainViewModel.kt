@@ -198,19 +198,24 @@ class MainViewModel : ViewModel() {
      *
      * @param T: Type of data to be saved (Must extend IData)
      * @param item: Object of variable type to be saved to Firebase
-     * @param collection: Collection for object to be stored in on Firebase (returns false if it DNE)
      * @author Aidan Kovacic
-     * @return False if passed collection was not valid
-     *
-     * Valid collections: "slice-entries", "artists", "models", "materials", "material-types", "brands", "printers"
+     * @return True if successfully saved
      */
-    internal fun <T: IData> save(item: T, collection: String): Boolean {
-        val validEntries: Array<String> = arrayOf("slice-entries", "artists", "models", "materials",
-                                                "material-types", "brands", "printers")
-        if (!validEntries.contains(collection)) {
-            Log.d("Firebase Save", "Invalid Collection Passed to save")
-            return false
+    internal fun <T: IData> save(item: T): Boolean {
+
+        // Assign the collection based on Data Type.
+        val collection = when (item) {
+            is SliceFile -> "slice-entries"
+            is Artist -> "artists"
+            is Model -> "models"
+            is Material -> "materials"
+            is MaterialType -> "material-types"
+            is Brand -> "brands"
+            is Printer -> "printers"
+            // This should theoretically not be able to be reached
+            else -> return false
         }
+
         val document =
             if (item.id.isNotEmpty()) {
                 // Update existing collection

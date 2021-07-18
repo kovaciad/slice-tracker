@@ -34,7 +34,7 @@ class MainFragment : Fragment() {
         val btnSaveTest = getView()?.findViewById<Button>(R.id.btnSaveTest)
 
         btnSaveTest?.setOnClickListener {
-            viewModel.save(Printer("Ender 3 Pro", "asduy324", "kjdfsh2", ), "printers")
+            viewModel.save(Printer("Ender 3 Pro", "asduy324", "kjdfsh2", ))
         }
         super.onViewCreated(view, savedInstanceState)
     }
