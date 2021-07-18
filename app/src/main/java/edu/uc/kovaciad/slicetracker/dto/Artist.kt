@@ -6,8 +6,8 @@ package edu.uc.kovaciad.slicetracker.dto
  * @param artistUrl: artist URL
  */
 data class Artist (
-            var artistName: String,
-            var artistUrl: String,
+            var artistName: String = "",
+            var artistUrl: String? = null,
             override var id: String = ""): IData {
 
     override fun toString(): String {
