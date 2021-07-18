@@ -5,18 +5,24 @@ import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import edu.uc.kovaciad.slicetracker.ui.main.MainFragment
+import edu.uc.kovaciad.slicetracker.ui.main.MainViewModel
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var detector: GestureDetectorCompat
     private var user: FirebaseUser? = null
+    private lateinit var mainFragment: MainFragment
+    private lateinit var activeFragment: Fragment
 
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
@@ -28,14 +34,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        var db = DatabaseService(application)
-//        var queryString : String = "INSERT INTO Brand (bid, brandName, brandURL) VALUES (1, 'Anycubic', 'www.anycubic.com')"
-//        val query = SimpleSQLiteQuery(queryString)
-//        Thread {
-//            db.getRoomDB().query(query)
-//        }.start()
-
         setContentView(R.layout.main_activity)
+        mainFragment = MainFragment()
+        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, mainFragment)
+                .commitNow()
+            activeFragment = mainFragment
+        }
 
         detector = GestureDetectorCompat(this, SliceGestureListener())
 

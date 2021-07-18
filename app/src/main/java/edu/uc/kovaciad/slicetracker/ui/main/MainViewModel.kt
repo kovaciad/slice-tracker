@@ -207,7 +207,7 @@ class MainViewModel : ViewModel() {
     internal fun <T: IData> save(item: T, collection: String): Boolean {
         val validEntries: Array<String> = arrayOf("slice-entries", "artists", "models", "materials",
                                                 "material-types", "brands", "printers")
-        if (validEntries.contains(collection)) {
+        if (!validEntries.contains(collection)) {
             Log.d("Firebase Save", "Invalid Collection Passed to save")
             return false
         }
