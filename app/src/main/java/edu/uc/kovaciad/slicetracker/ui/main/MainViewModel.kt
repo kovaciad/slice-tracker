@@ -10,10 +10,14 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings
 import edu.uc.kovaciad.slicetracker.dto.*
 
 class MainViewModel : ViewModel() {
-    var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     init {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
+        createListeners()
+    }
+
+    private fun createListeners() {
         listenToSliceFiles()
         listenToBrands()
         listenToModels()
