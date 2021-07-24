@@ -13,13 +13,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import edu.uc.kovaciad.slicetracker.R
 
-class OverviewFragment : Fragment() {
+class OverviewFragment : SuperFragment() {
 
     companion object {
         fun newInstance() = OverviewFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
     private var totalPrintTime: Double = 0.0
     private var totalMats: Double = 0.0
 
@@ -31,9 +30,8 @@ class OverviewFragment : Fragment() {
         return inflater.inflate(R.layout.overview_fragment, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         val actTotalPrintTime = getView()?.findViewById<TextView>(R.id.actTotalPrintTime)
         val actTotalMaterials = getView()?.findViewById<TextView>(R.id.actTotalMaterial)
         val overviewList = getView()?.findViewById<ListView>(R.id.overviewList)

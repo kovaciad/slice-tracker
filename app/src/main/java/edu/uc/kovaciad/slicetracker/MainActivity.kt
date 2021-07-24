@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         mainFragment = MainFragment.newInstance()
         overviewFragment = OverviewFragment.newInstance()
+        val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, mainFragment)
@@ -103,7 +105,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // On swipe right, go back to main page
-    private fun onSwipeRight() {
+    internal fun onSwipeRight() {
         if (activeFragment == overviewFragment) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance())
@@ -113,7 +115,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // On swipe left, open the overview page
-    private fun onSwipeLeft() {
+    internal fun onSwipeLeft() {
         if (activeFragment == mainFragment) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, OverviewFragment.newInstance())

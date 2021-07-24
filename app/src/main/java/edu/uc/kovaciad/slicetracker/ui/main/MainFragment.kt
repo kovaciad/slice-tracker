@@ -9,24 +9,22 @@ import edu.uc.kovaciad.slicetracker.R
 import edu.uc.kovaciad.slicetracker.dto.Printer
 
 
-class MainFragment : Fragment() {
+class MainFragment : SuperFragment() {
 
     companion object {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View {
+    ): View? {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         // Synthetics aren't working at the moment and neither is data binding
         // One of our UI designers needs to get on this soon - Aidan
 
@@ -36,7 +34,6 @@ class MainFragment : Fragment() {
         btnSaveTest?.setOnClickListener {
             viewModel.save(Printer("Ender 3 Pro", "asduy324", "kjdfsh2", ))
         }
-        super.onViewCreated(view, savedInstanceState)
     }
 
 
