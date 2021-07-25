@@ -27,8 +27,9 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // Synthetics aren't working at the moment and neither is data binding
-        // One of our UI designers needs to get on this soon - Aidan
+        /* Synthetics aren't working at the moment and neither is data binding
+          /* One of our UI designers needs to get on this soon - Aidan */
+         */
 
         // This section is simply for demonstrating save() for the purposes of this sprint
         val btnSaveTest = getView()?.findViewById<Button>(R.id.btnSaveTest)
