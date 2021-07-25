@@ -10,9 +10,9 @@ import androidx.room.PrimaryKey
  * @param artistUrl: artist URL
  */
 @Entity(tableName = "Artist")
-class Artist (@PrimaryKey var aid: Int,
-    @ColumnInfo(name = "artistName")var artistName: String,
-    @ColumnInfo(name = "artistUrl")var artistUrl: String) {
+class Artist(@PrimaryKey var aid: Int,
+             @ColumnInfo(name = "artistName")var artistName: String,
+             @ColumnInfo(name = "artistUrl")var artistUrl: String) {
         override fun toString(): String {
             return artistName
         }

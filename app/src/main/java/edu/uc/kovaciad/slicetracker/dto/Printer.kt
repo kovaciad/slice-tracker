@@ -11,11 +11,11 @@ import androidx.room.PrimaryKey
  * @param modelUrl: model URL
  */
 @Entity(tableName = "Printer")
-data class Printer (@PrimaryKey val pid: Int,
-                    @ColumnInfo(name = "printerName") var printerName: String,
-                    @ColumnInfo(name = "materialTypeId") var materialTypeId: Int,
-                    @ColumnInfo(name = "brandId") var brandId: Int = 0,
-                    @ColumnInfo(name = "printerUrl") var printerUrl: String) {
+data class Printer(@PrimaryKey val pid: Int,
+                   @ColumnInfo(name = "printerName") var printerName: String,
+                   @ColumnInfo(name = "materialTypeId") var materialTypeId: Int,
+                   @ColumnInfo(name = "brandId") var brandId: Int = 0,
+                   @ColumnInfo(name = "printerUrl") var printerUrl: String) {
     override fun toString(): String {
         return printerName
     }

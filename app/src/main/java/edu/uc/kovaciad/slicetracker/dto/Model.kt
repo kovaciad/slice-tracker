@@ -11,10 +11,10 @@ import androidx.room.PrimaryKey
  * @param modelUrl: model URL
  */
 @Entity(tableName = "Model")
-data class Model (@PrimaryKey var mid: Int,
-                  @ColumnInfo(name = "modelName")var modelName: String,
-                  @ColumnInfo(name = "artistId")var artistId: Int,
-                  @ColumnInfo(name = "modelUrl")var url: String) {
+data class Model(@PrimaryKey var mid: Int,
+                 @ColumnInfo(name = "modelName")var modelName: String,
+                 @ColumnInfo(name = "artistId")var artistId: Int,
+                 @ColumnInfo(name = "modelUrl")var url: String) {
     override fun toString(): String {
         return modelName
     }

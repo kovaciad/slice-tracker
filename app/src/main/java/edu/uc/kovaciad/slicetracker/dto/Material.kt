@@ -14,12 +14,12 @@ import androidx.room.PrimaryKey
  * @param materialAmount: Amount of filament in g or L
  */
 @Entity(tableName = "material")
-data class Material (@PrimaryKey var mid: Int,
-                     @ColumnInfo(name = "materialName") var materialName: String,
-                     @ColumnInfo(name = "materialTypeId") var materialTypeId: Int,
-                     @ColumnInfo(name = "brandId") var brandId: Int,
-                     @ColumnInfo(name = "materialColor") var materialColor: Int,
-                     @ColumnInfo(name = "materialAmount") var materialAmount: Double) {
+data class Material(@PrimaryKey var mid: Int,
+                    @ColumnInfo(name = "materialName") var materialName: String,
+                    @ColumnInfo(name = "materialTypeId") var materialTypeId: Int,
+                    @ColumnInfo(name = "brandId") var brandId: Int,
+                    @ColumnInfo(name = "materialColor") var materialColor: Int,
+                    @ColumnInfo(name = "materialAmount") var materialAmount: Double) {
     override fun toString(): String {
         return materialName
     }

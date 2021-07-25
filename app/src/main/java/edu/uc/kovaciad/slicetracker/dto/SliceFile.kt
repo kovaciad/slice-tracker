@@ -24,21 +24,21 @@ import kotlin.time.ExperimentalTime
  * @param filamentEstimatedMaterial: estimated amount of filament needed
  */
 @Entity(tableName = "SliceFile")
-data class SliceFile (@PrimaryKey var sfid: Int,
-                      @ColumnInfo(name = "sliceFileName") var sliceFileName : String,
-                      @ColumnInfo(name = "modelId") var modelId : Int,
-                      @ColumnInfo(name = "materialId") var materialId : Int,
-                      @ColumnInfo(name = "resinBaseLayers") var resinBaseLayers : Int = 0,
-                      @ColumnInfo(name = "resinBaseLayerCureTime") var resinBaseLayerCureTime : Int = 0,
-                      @ColumnInfo(name = "resinLayerThickness") var resinLayerThickness : Double = 0.0,
-                      @ColumnInfo(name = "resinLayerCureTime") var resinLayerCureTime : Double = 0.0,
-                      @ColumnInfo(name = "resinLiftSpeed") var resinLiftSpeed : Int = 0,
-                      @ColumnInfo(name = "resinRetractSpeed") var resinRetractSpeed : Int = 0,
-                      @ColumnInfo(name = "resinLiftHeight") var resinLiftHeight : Int = 0,
-                      @ColumnInfo(name = "numberOfLayers") var numberOfLayers : Int = 0,
-                      @ColumnInfo(name = "filamentNozzleThickness") var filamentNozzleThickness : Double = 0.0,
-                      @ColumnInfo(name = "filamentNozzleEstimatedTime") var filamentNozzleEstimatedTime : Time,
-                      @ColumnInfo(name = "filamentEstimatedMaterial") var filamentEstimatedMaterial : Double = 0.0) {
+data class SliceFile(@PrimaryKey var sfid: Int,
+                     @ColumnInfo(name = "sliceFileName") var sliceFileName : String,
+                     @ColumnInfo(name = "modelId") var modelId : Int,
+                     @ColumnInfo(name = "materialId") var materialId : Int,
+                     @ColumnInfo(name = "resinBaseLayers") var resinBaseLayers : Int = 0,
+                     @ColumnInfo(name = "resinBaseLayerCureTime") var resinBaseLayerCureTime : Int = 0,
+                     @ColumnInfo(name = "resinLayerThickness") var resinLayerThickness : Double = 0.0,
+                     @ColumnInfo(name = "resinLayerCureTime") var resinLayerCureTime : Double = 0.0,
+                     @ColumnInfo(name = "resinLiftSpeed") var resinLiftSpeed : Int = 0,
+                     @ColumnInfo(name = "resinRetractSpeed") var resinRetractSpeed : Int = 0,
+                     @ColumnInfo(name = "resinLiftHeight") var resinLiftHeight : Int = 0,
+                     @ColumnInfo(name = "numberOfLayers") var numberOfLayers : Int = 0,
+                     @ColumnInfo(name = "filamentNozzleThickness") var filamentNozzleThickness : Double = 0.0,
+                     @ColumnInfo(name = "filamentNozzleEstimatedTime") var filamentNozzleEstimatedTime : Time,
+                     @ColumnInfo(name = "filamentEstimatedMaterial") var filamentEstimatedMaterial : Double = 0.0) {
     override fun toString(): String {
         return sliceFileName
     }
