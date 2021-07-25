@@ -10,8 +10,7 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "MaterialType")
 data class MaterialType(@PrimaryKey val mtid : Int,
-                        @ColumnInfo(name = "materialTypeName") var materialTypeName : String)
-{
+                        @ColumnInfo(name = "materialTypeName") var materialTypeName : String) {
     override fun toString(): String {
         return materialTypeName
     }

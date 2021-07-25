@@ -38,8 +38,7 @@ data class SliceFile (@PrimaryKey var sfid: Int,
                       @ColumnInfo(name = "numberOfLayers") var numberOfLayers : Int = 0,
                       @ColumnInfo(name = "filamentNozzleThickness") var filamentNozzleThickness : Double = 0.0,
                       @ColumnInfo(name = "filamentNozzleEstimatedTime") var filamentNozzleEstimatedTime : Time,
-                      @ColumnInfo(name = "filamentEstimatedMaterial") var filamentEstimatedMaterial : Double = 0.0)
-{
+                      @ColumnInfo(name = "filamentEstimatedMaterial") var filamentEstimatedMaterial : Double = 0.0) {
     override fun toString(): String {
         return sliceFileName
     }
