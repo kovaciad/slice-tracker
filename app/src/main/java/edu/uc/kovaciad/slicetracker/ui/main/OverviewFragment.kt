@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import edu.uc.kovaciad.slicetracker.R
 
 class OverviewFragment : Fragment() {

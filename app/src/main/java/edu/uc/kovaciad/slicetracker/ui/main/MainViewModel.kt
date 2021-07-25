@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import edu.uc.kovaciad.slicetracker.dto.*
@@ -22,7 +21,6 @@ class MainViewModel : ViewModel() {
         listenToMaterialTypes()
         listenToArtists()
     }
-
 
     private var _sliceFiles: MutableLiveData<ArrayList<SliceFile>> = MutableLiveData<ArrayList<SliceFile>>()
     private var _printers: MutableLiveData<ArrayList<Printer>> = MutableLiveData<ArrayList<Printer>>()
