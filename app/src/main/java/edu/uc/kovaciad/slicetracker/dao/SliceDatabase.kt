@@ -35,7 +35,7 @@ abstract class SliceDatabase : RoomDatabase() {
                                 super.onCreate(db)
 
                                // db.execSQL("INSERT INTO Brand (bid, brandName, brandURL) VALUES (1, 'Anycubic', 'www.anycubic.com')")
-                                //db.execSQL("INSERT INTO Brand (bid, brandName, brandURL) VALUES (2, 'Elegoo', 'www.elegpp.com')")
+                                // db.execSQL("INSERT INTO Brand (bid, brandName, brandURL) VALUES (2, 'Elegoo', 'www.elegpp.com')")
 
                             }
                         })
