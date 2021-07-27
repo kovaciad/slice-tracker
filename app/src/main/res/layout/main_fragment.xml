@@ -14,9 +14,149 @@
         android:text="TestSave"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintVertical_bias="0.913" />
+
+    <AutoCompleteTextView
+        android:id="@+id/PrinterAutoComplete"
+        android:layout_width="223dp"
+        android:layout_height="52dp"
+        android:text="Printer"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="174dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Slice File Name"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="43dp" />
+
+    <Button
+        android:id="@+id/modelButton"
+        android:layout_width="218dp"
+        android:layout_height="44dp"
+        android:text="Select Model"
+        tools:layout_editor_absoluteX="92dp"
+        tools:layout_editor_absoluteY="110dp" />
+
+    <RadioGroup
+        android:id="@+id/materialType"
+        android:layout_width="221dp"
+        android:layout_height="88dp"
+        tools:layout_editor_absoluteX="92dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/materialAutoComplete"
+        android:layout_width="224dp"
+        android:layout_height="41dp"
+        android:text="Material"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="353dp" />
+
+    <EditText
+        android:id="@+id/resinBaseLayers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="418dp" />
+
+    <EditText
+        android:id="@+id/numberOfLayers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number|numberDecimal"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="784dp" />
+
+    <EditText
+        android:id="@+id/resinBaseLayerCureTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number|numberDecimal"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="492dp" />
+
+    <EditText
+        android:id="@+id/resinLiftSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number|numberDecimal"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="559dp" />
+
+    <EditText
+        android:id="@+id/resinRetractSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number|numberDecimal"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="626dp" />
+
+    <EditText
+        android:id="@+id/resinLiftHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number|numberDecimal"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="701dp" />
+
+    <EditText
+        android:id="@+id/resinLayerThickness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="863dp" />
+
+    <EditText
+        android:id="@+id/resinLayerCureTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="945dp" />
+
+    <EditText
+        android:id="@+id/filamentNozzleThickness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="1029dp" />
+
+    <EditText
+        android:id="@+id/filamentNozzleEstimatedTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="1105dp" />
+
+    <EditText
+        android:id="@+id/filamentEstimatedMaterial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="1189dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
