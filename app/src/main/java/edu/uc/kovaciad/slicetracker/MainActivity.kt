@@ -93,16 +93,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
             } else {
-                // top or bottom
-                if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                    if (diffY < 0) {
-                        // Swipe bottom
-                        this@MainActivity.onSwipeBottom()
-                    }
-                    true
-                } else {
-                    return super.onFling(downEvent, moveEvent, velocityX, velocityY)
-                }
+                return super.onFling(downEvent, moveEvent, velocityX, velocityY)
+
             }
 
         }
@@ -126,11 +118,6 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
             activeFragment = overviewFragment
         }
-    }
-
-    // For future use
-    private fun onSwipeBottom() {
-        Toast.makeText(applicationContext, "Swiped bottom (Will be something useful probably)", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
