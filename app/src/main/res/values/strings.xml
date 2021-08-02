@@ -6,4 +6,29 @@
     <string name="statsOverview">The Numbers</string>
     <string name="totalTime">Total Print Time: %1$s minutes</string>
     <string name="totalMats">Total Materials: %1$s g</string>
+
+    <!-- main page -->
+    <string name="resinBaseLayers">Resin Base Layers</string>
+    <string name="baseCure">Base Cure</string>
+    <string name="sliceName">Slice File Name</string>
+    <string name="resinLiftSpeed">Resin Lift Speed</string>
+    <string name="resinSpeed">Resin Retract Speed</string>
+    <string name="resinLiftHeight">Resin Lift Height</string>
+    <string name="numLayers">Number of Layers</string>
+    <string name="resLayerThic">Resin Layer Thickness</string>
+    <string name="resCureTime">Resin Cure Time</string>
+    <string name="filNozzleThic">Filament Nozzle Thickness</string>
+    <string name="filEstTimeNoz">Estimated Time (Filament Nozzle)</string>
+    <string name="filEstTime">Estimated Print Time (Filament)</string>
+    <string name="printer">Printer</string>
+    <string name="save">Save</string>
+    <string name="selectModel">Select Model</string>
+    <string-array name="matTypeArray">
+        <item>PLA</item>
+        <item>PLA+</item>
+        <item>PETG</item>
+        <item>ABS</item>
+        <item>Nylon</item>
+        <item>Resin</item>
+    </string-array>
 </resources>

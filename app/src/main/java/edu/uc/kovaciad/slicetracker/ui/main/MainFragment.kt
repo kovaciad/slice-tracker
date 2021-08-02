@@ -2,7 +2,9 @@ package edu.uc.kovaciad.slicetracker.ui.main
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import edu.uc.kovaciad.slicetracker.R
@@ -27,15 +29,20 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // Synthetics aren't working at the moment and neither is data binding
-        // One of our UI designers needs to get on this soon - Aidan
 
-        // This section is simply for demonstrating save() for the purposes of this sprint
-        val btnSaveTest = getView()?.findViewById<Button>(R.id.btnSaveTest)
-
-        btnSaveTest?.setOnClickListener {
-            viewModel.save(Printer("Ender 3 Pro", "asduy324", "kjdfsh2", ))
+        // Hardcode the values of matTypeSpinner (see in strings.xml)
+        val matTypeSpinner = getView()?.findViewById<Spinner>(R.id.matTypeSpinner)
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.matTypeArray,
+            android.R.layout.simple_spinner_item
+        ).also {
+            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            if (matTypeSpinner != null) {
+                matTypeSpinner.adapter = it
+            }
         }
+
         super.onViewCreated(view, savedInstanceState)
     }
 
