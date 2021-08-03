@@ -5,7 +5,7 @@ package edu.uc.kovaciad.slicetracker.dto
  * @param id: DB ID for dev use
  * @param sliceFileName: User Inputted Name
  * @param modelId: model id
- * @param materialId: material id
+ * @param material: material used
  * @param resinBaseLayers: Total Base layers for resin
  * @param resinBaseLayerCureTime: Cure time per base layer
  * @param resinLayerThickness: Layer thickness for resin
@@ -21,7 +21,7 @@ package edu.uc.kovaciad.slicetracker.dto
 data class SliceFile (
                       var sliceFileName : String = "",
                       var modelId : String = "",
-                      var materialId : String = "",
+                      var material : String = "",
                       var resinBaseLayers : Int = 0,
                       var resinBaseLayerCureTime : Int = 0,
                       var resinLayerThickness : Double = 0.0,

@@ -18,8 +18,8 @@
     <string name="resLayerThic">Resin Layer Thickness</string>
     <string name="resCureTime">Resin Cure Time</string>
     <string name="filNozzleThic">Filament Nozzle Thickness</string>
-    <string name="filEstTimeNoz">Estimated Time (Filament Nozzle)</string>
-    <string name="filEstTime">Estimated Print Time (Filament)</string>
+    <string name="filEstTime">Estimated Time (hrs)</string>
+    <string name="filEstMat">Estimated Material (g)</string>
     <string name="printer">Printer</string>
     <string name="save">Save</string>
     <string name="selectModel">Select Model</string>
