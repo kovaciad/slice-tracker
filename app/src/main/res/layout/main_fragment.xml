@@ -14,15 +14,15 @@
         android:text="TestSave"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.913" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <AutoCompleteTextView
         android:id="@+id/PrinterAutoComplete"
-        android:layout_width="223dp"
-        android:layout_height="0dp"
+        android:layout_width="227dp"
+        android:layout_height="44dp"
         android:layout_marginBottom="16dp"
         android:text="Printer"
         app:layout_constraintBottom_toTopOf="@+id/materialType"
@@ -46,8 +46,8 @@
 
     <Button
         android:id="@+id/modelButton"
-        android:layout_width="218dp"
-        android:layout_height="0dp"
+        android:layout_width="217dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="20dp"
         android:text="Select Model"
         app:layout_constraintBottom_toTopOf="@+id/PrinterAutoComplete"
@@ -57,8 +57,8 @@
 
     <RadioGroup
         android:id="@+id/materialType"
-        android:layout_width="221dp"
-        android:layout_height="0dp"
+        android:layout_width="227dp"
+        android:layout_height="35dp"
         android:layout_marginBottom="23dp"
         app:layout_constraintBottom_toTopOf="@+id/materialAutoComplete"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,8 +67,8 @@
 
     <AutoCompleteTextView
         android:id="@+id/materialAutoComplete"
-        android:layout_width="224dp"
-        android:layout_height="0dp"
+        android:layout_width="220dp"
+        android:layout_height="54dp"
         android:layout_marginBottom="24dp"
         android:text="Material"
         app:layout_constraintBottom_toTopOf="@+id/resinBaseLayers"
@@ -92,7 +92,7 @@
         android:id="@+id/numberOfLayers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="34dp"
         android:ems="10"
         android:inputType="number|numberDecimal"
