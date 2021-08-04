@@ -5,6 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:isScrollContainer="false"
+    android:layoutMode="opticalBounds"
     tools:context=".ui.main.MainFragment">
 
     <AutoCompleteTextView
@@ -233,5 +235,4 @@
         app:layout_constraintEnd_toEndOf="@+id/PrinterAutoComplete"
         app:layout_constraintStart_toStartOf="@+id/PrinterAutoComplete"
         app:layout_constraintTop_toBottomOf="@+id/resinBaseLayerCureTime" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

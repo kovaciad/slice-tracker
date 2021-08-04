@@ -3,21 +3,19 @@ package edu.uc.kovaciad.slicetracker
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.sqlite.db.SimpleSQLiteQuery
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import edu.uc.kovaciad.slicetracker.ui.main.MainFragment
-import edu.uc.kovaciad.slicetracker.ui.main.MainViewModel
 import edu.uc.kovaciad.slicetracker.ui.main.OverviewFragment
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,6 +44,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         detector = GestureDetectorCompat(this, SliceGestureListener())
+
+        
+        val resinRadioButton = findViewById<RadioButton>(R.id.resinRadio)
+        val filamentRadioButton = findViewById<RadioButton>(R.id.filamentRadio)
+
+        resinRadioButton.setOnClickListener { clickResin() }
+
+        filamentRadioButton.setOnClickListener { clickResin() }
 
     }
 
@@ -177,5 +183,29 @@ class MainActivity : AppCompatActivity() {
         // Reload options menu to reset options menu
         invalidateOptionsMenu()
     }
+    fun clickFilament() {
+        findViewById<View>(R.id.resinBaseLayers).visibility = View.INVISIBLE
+        findViewById<View>(R.id.resinBaseLayerCureTime).visibility = View.INVISIBLE
+        findViewById<View>(R.id.resinLayerCureTime).visibility = View.INVISIBLE
+        findViewById<View>(R.id.resinLayerThickness).visibility = View.INVISIBLE
+        findViewById<View>(R.id.resinLiftHeight).visibility = View.INVISIBLE
+        findViewById<View>(R.id.resinLiftSpeed).visibility = View.INVISIBLE
+        findViewById<View>(R.id.resinRetractSpeed).visibility = View.INVISIBLE
+        findViewById<View>(R.id.filamentEstimatedMaterial).visibility = View.VISIBLE
+        findViewById<View>(R.id.filamentNozzleEstimatedTime).visibility = View.VISIBLE
+        findViewById<View>(R.id.filamentNozzleThickness).visibility = View.VISIBLE
+    }
 
+    fun clickResin() {
+        findViewById<View>(R.id.resinBaseLayers).visibility = View.VISIBLE
+        findViewById<View>(R.id.resinBaseLayerCureTime).visibility = View.VISIBLE
+        findViewById<View>(R.id.resinLayerCureTime).visibility = View.VISIBLE
+        findViewById<View>(R.id.resinLayerThickness).visibility = View.VISIBLE
+        findViewById<View>(R.id.resinLiftHeight).visibility = View.VISIBLE
+        findViewById<View>(R.id.resinLiftSpeed).visibility = View.VISIBLE
+        findViewById<View>(R.id.resinRetractSpeed).visibility = View.VISIBLE
+        findViewById<View>(R.id.filamentEstimatedMaterial).visibility = View.INVISIBLE
+        findViewById<View>(R.id.filamentNozzleEstimatedTime).visibility = View.INVISIBLE
+        findViewById<View>(R.id.filamentNozzleThickness).visibility = View.INVISIBLE
+    }
 }
