@@ -7,14 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.OverviewFragment">
 
-    <ListView
-        android:id="@+id/overviewList"
-        android:layout_width="wrap_content"
-        android:layout_height="446dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/OverviewTitle"
         android:layout_width="210dp"
@@ -32,39 +24,46 @@
         android:id="@+id/StatsOverview"
         android:layout_width="145dp"
         android:layout_height="31dp"
-        android:layout_marginBottom="184dp"
+        android:layout_marginBottom="136dp"
         android:text="@string/statsOverview"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/actTotalPrintTime"
         android:layout_width="369dp"
         android:layout_height="43dp"
-        android:textSize="18sp"
         android:text="@string/totalTime"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.619"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/StatsOverview"
-        app:layout_constraintVertical_bias="0.064" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/actTotalMaterial"
         android:layout_width="369dp"
         android:layout_height="43dp"
-        android:textSize="18sp"
         android:text="@string/totalMats"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.619"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/StatsOverview"
-        app:layout_constraintVertical_bias="0.435" />
+        app:layout_constraintVertical_bias="0.456" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcySlices"
+        android:layout_width="411dp"
+        android:layout_height="407dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

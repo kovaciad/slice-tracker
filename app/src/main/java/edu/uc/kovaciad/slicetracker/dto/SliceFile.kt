@@ -17,8 +17,8 @@ package edu.uc.kovaciad.slicetracker.dto
  * @param resinLiftHeight: Height that printer stops at after raising (mm)
  * @param numberOfLayers: Number of layers - this is for both resin and filament
  * @param filamentNozzleThickness: Thickness of nozzle printing filament
- * @param estimatedTime: Estimated amount of print time, filament
- * @param filamentEstimatedMaterial: estimated amount of filament needed
+ * @param estimatedTime: Estimated amount of print time
+ * @param estimatedMaterial: estimated amount of material needed
  */
 data class SliceFile (
     var sliceFileName : String = "",
@@ -36,10 +36,10 @@ data class SliceFile (
     var numberOfLayers : Int = 0,
     var filamentNozzleThickness : Double = 0.0,
     var estimatedTime : Double = 0.0,
-    var filamentEstimatedMaterial : Double = 0.0,
+    var estimatedMaterial : Double = 0.0,
     override var id: String = ""): IData
 {
     override fun toString(): String {
-        return "$sliceFileName | Time: $estimatedTime min | Material: $filamentEstimatedMaterial g or L"
+        return "$sliceFileName | Time: $estimatedTime min | Material: $estimatedMaterial g or L"
     }
 }

@@ -9,7 +9,6 @@ import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import edu.uc.kovaciad.slicetracker.R
-import edu.uc.kovaciad.slicetracker.databinding.MainFragmentBinding
 import edu.uc.kovaciad.slicetracker.dto.SliceFile
 import kotlinx.coroutines.*
 
@@ -17,7 +16,6 @@ import kotlinx.coroutines.*
 class MainFragment : Fragment() {
 
     var selectedMaterialType = ""
-    private lateinit var binding: MainFragmentBinding
     var currentFilament = false
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
@@ -38,9 +36,6 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // Bindings are a bit funky in that sometimes they just decide to not work and sometimes they do.
-        binding = MainFragmentBinding.inflate(layoutInflater)
-        // Hardcode the values of matTypeSpinner (see in strings.xml)
         val matTypeButton = getView()?.findViewById<RadioGroup>(R.id.material)
 
         matTypeButton!!.setOnCheckedChangeListener { group: RadioGroup, id: Int ->
@@ -80,8 +75,7 @@ class MainFragment : Fragment() {
         val saveButton = getView()?.findViewById<ImageButton>(R.id.saveButton)
         saveButton!!.setOnClickListener {
             val sliceFile = SliceFile()
-            // We need to retrieve from every form input. Start with ones that apply to all
-            // Bindings are once again broken. Trust me, I tried.
+            // Save fields that apply to both filament and resin
             val sliceFileName = getView()?.findViewById<TextView>(R.id.sliceNameEntry)
             sliceFile.sliceFileName = sliceFileName!!.text.toString()
             val printerName = getView()?.findViewById<TextView>(R.id.printer)
@@ -98,23 +92,25 @@ class MainFragment : Fragment() {
             val numberOfLayers = getView()?.findViewById<TextView>(R.id.numberOfLayers)
             sliceFile.numberOfLayers = if (numberOfLayers!!.text.toString().isNotEmpty())
                 numberOfLayers.text.toString().toInt() else 0
+            val estimatedMaterial =
+                getView()?.findViewById<TextView>(R.id.estimatedMaterial)
+            sliceFile.estimatedMaterial =
+                if (estimatedMaterial!!.text.toString().isNotEmpty())
+                    estimatedMaterial.text.toString().toDouble() else 0.0
             sliceFile.material = selectedMaterialType
 
             if (selectedMaterialType != "Resin" && sliceFile.sliceFileName.isNotEmpty()) {
-                val filamentEstimatedMaterial =
-                    getView()?.findViewById<TextView>(R.id.filamentEstimatedMaterial)
-                sliceFile.filamentEstimatedMaterial =
-                    if (filamentEstimatedMaterial!!.text.toString().isNotEmpty())
-                        filamentEstimatedMaterial.text.toString().toDouble() else 0.0
-                val filamentEstimatedThickness =
+                // Filament only fields go here to be saved
+                val filamentNozzleThickness =
                     getView()?.findViewById<TextView>(R.id.filamentNozzleThickness)
                 sliceFile.filamentNozzleThickness =
-                    if (filamentEstimatedThickness!!.text.toString().isNotEmpty())
-                        filamentEstimatedThickness.text.toString().toDouble() else 0.0
+                    if (filamentNozzleThickness!!.text.toString().isNotEmpty())
+                        filamentNozzleThickness.text.toString().toDouble() else 0.0
                 uiScope.launch(Dispatchers.IO) {
                     saveSlice(sliceFile)
                 }
             } else if (sliceFile.sliceFileName.isNotEmpty()){
+                // Resin only fields go here to be saved
                 val resinBaseLayerCureTime = getView()?.findViewById<TextView>(R.id.resinBaseLayerCureTime)
                 sliceFile.resinBaseLayerCureTime =
                     if (resinBaseLayerCureTime!!.text.toString().isNotEmpty() &&

@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.TextView
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import edu.uc.kovaciad.slicetracker.R
+import edu.uc.kovaciad.slicetracker.dto.SliceFile
+import kotlin.math.roundToLong
 
 class OverviewFragment : Fragment() {
 
@@ -34,33 +37,69 @@ class OverviewFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         val actTotalPrintTime = getView()?.findViewById<TextView>(R.id.actTotalPrintTime)
         val actTotalMaterials = getView()?.findViewById<TextView>(R.id.actTotalMaterial)
-        val overviewList = getView()?.findViewById<ListView>(R.id.overviewList)
+        val rcySlices = getView()?.findViewById<RecyclerView>(R.id.rcySlices)
+        var slices: ArrayList<SliceFile>
+        /*
+        This observer is a workaround for a bug where the value of the LiveData would be null on start
+        It is not elegant, but it allows this to work as it waits for a value.
+         */
         viewModel.sliceFiles.observe(viewLifecycleOwner, {
-            sliceFiles ->
-                overviewList?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, sliceFiles)
+                sliceFiles ->
+                    slices = sliceFiles
+                    rcySlices!!.adapter = SliceAdapter(slices, R.layout.rootlayout)
         })
+        rcySlices!!.hasFixedSize()
+        rcySlices.layoutManager = LinearLayoutManager(context)
+        rcySlices.itemAnimator = DefaultItemAnimator()
 
         val res = resources
         viewModel.sliceFiles.observe(viewLifecycleOwner, {
             sliceFiles ->
                 totalPrintTime = 0.0
-                sliceFiles.forEach {
-                    totalPrintTime += it.estimatedTime
-                }
-
-                val text = String.format(res.getString(R.string.totalTime), totalPrintTime.toString())
-                actTotalPrintTime?.text = text
-        })
-
-        viewModel.sliceFiles.observe(viewLifecycleOwner, {
-            sliceFiles ->
                 totalMats = 0.0
                 sliceFiles.forEach {
-                    totalMats += it.filamentEstimatedMaterial
+                    totalPrintTime += it.estimatedTime
+                    totalMats += it.estimatedMaterial
                 }
-                val text = String.format(res.getString(R.string.totalMats), totalMats.toString())
-                actTotalMaterials?.text = text
+
+                val tText = String.format(res.getString(R.string.totalTime), totalPrintTime.roundToLong().toString())
+                val mText = String.format(res.getString(R.string.totalMats), totalMats.roundToLong().toString())
+                actTotalPrintTime?.text = tText
+                actTotalMaterials?.text = mText
         })
+
+    }
+
+    inner class SliceAdapter(private val slices: ArrayList<SliceFile>, private val itemLayout: Int) : RecyclerView.Adapter<OverviewFragment.SliceViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliceViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(itemLayout, parent, false)
+            return SliceViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: SliceViewHolder, position: Int) {
+            val slice = slices.get(position)
+            holder.updateSlices(slice)
+        }
+
+        override fun getItemCount(): Int {
+            return slices.size
+        }
+
+    }
+
+    inner class SliceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private var lblSlice: TextView = itemView.findViewById(R.id.lblSlice)
+        private var lblTime: TextView = itemView.findViewById(R.id.lblTime)
+        private var lblMats: TextView = itemView.findViewById(R.id.lblMats)
+
+        fun updateSlices(sliceFile: SliceFile) {
+            val res = resources
+            lblSlice.text = sliceFile.sliceFileName
+            lblTime.text = String.format(res.getString(R.string.totalTime),
+                sliceFile.estimatedTime.toString())
+            lblMats.text = String.format(res.getString(R.string.totalMats),
+                sliceFile.estimatedMaterial.toString())
+        }
     }
 
 }
