@@ -84,6 +84,17 @@ class MainFragment : Fragment() {
             // Bindings are once again broken. Trust me, I tried.
             val sliceFileName = getView()?.findViewById<TextView>(R.id.sliceNameEntry)
             sliceFile.sliceFileName = sliceFileName!!.text.toString()
+            val printerName = getView()?.findViewById<TextView>(R.id.printer)
+            sliceFile.printer = printerName!!.text.toString()
+            val modelName = getView()?.findViewById<TextView>(R.id.modelName)
+            sliceFile.printer = modelName!!.text.toString()
+            val artistName = getView()?.findViewById<TextView>(R.id.artistName)
+            sliceFile.artist = artistName!!.text.toString()
+            val estTime =
+                getView()?.findViewById<TextView>(R.id.filamentEstimatedTime)
+            sliceFile.estimatedTime =
+                if (estTime!!.text.isNotEmpty())
+                    estTime.text.toString().toDouble() else 0.0
             val numberOfLayers = getView()?.findViewById<TextView>(R.id.numberOfLayers)
             sliceFile.numberOfLayers = if (numberOfLayers!!.text.toString().isNotEmpty())
                 numberOfLayers.text.toString().toInt() else 0
@@ -95,16 +106,11 @@ class MainFragment : Fragment() {
                 sliceFile.filamentEstimatedMaterial =
                     if (filamentEstimatedMaterial!!.text.toString().isNotEmpty())
                         filamentEstimatedMaterial.text.toString().toDouble() else 0.0
-                val filamentEstimatedTime =
+                val filamentEstimatedThickness =
                     getView()?.findViewById<TextView>(R.id.filamentNozzleThickness)
-                sliceFile.filamentNozzleEstimatedTime =
-                    if (filamentEstimatedTime!!.text.toString().isNotEmpty())
-                        filamentEstimatedTime.text.toString().toDouble() else 0.0
-                val filamentNozzleThickness =
-                    getView()?.findViewById<TextView>(R.id.filamentEstimatedTime)
                 sliceFile.filamentNozzleThickness =
-                    if (filamentNozzleThickness!!.text.isNotEmpty())
-                        filamentNozzleThickness.text.toString().toDouble() else 0.0
+                    if (filamentEstimatedThickness!!.text.toString().isNotEmpty())
+                        filamentEstimatedThickness.text.toString().toDouble() else 0.0
                 uiScope.launch(Dispatchers.IO) {
                     saveSlice(sliceFile)
                 }

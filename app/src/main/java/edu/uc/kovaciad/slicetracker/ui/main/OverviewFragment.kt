@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import edu.uc.kovaciad.slicetracker.R
 
 class OverviewFragment : Fragment() {
@@ -47,7 +45,7 @@ class OverviewFragment : Fragment() {
             sliceFiles ->
                 totalPrintTime = 0.0
                 sliceFiles.forEach {
-                    totalPrintTime += it.filamentNozzleEstimatedTime
+                    totalPrintTime += it.estimatedTime
                 }
 
                 val text = String.format(res.getString(R.string.totalTime), totalPrintTime.toString())
