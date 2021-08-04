@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import edu.uc.kovaciad.slicetracker.dto.*
+import kotlinx.coroutines.tasks.await
+import java.lang.Exception
 
 class MainViewModel : ViewModel() {
     var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -19,8 +21,6 @@ class MainViewModel : ViewModel() {
         listenToModels()
         listenToPrinters()
         listenToMaterials()
-        listenToMaterialTypes()
-        listenToArtists()
     }
 
 
@@ -29,8 +29,6 @@ class MainViewModel : ViewModel() {
     private var _models: MutableLiveData<ArrayList<Model>> = MutableLiveData<ArrayList<Model>>()
     private var _brands: MutableLiveData<ArrayList<Brand>> = MutableLiveData<ArrayList<Brand>>()
     private var _materials: MutableLiveData<ArrayList<Material>> = MutableLiveData<ArrayList<Material>>()
-    private var _materialTypes: MutableLiveData<ArrayList<MaterialType>> = MutableLiveData<ArrayList<MaterialType>>()
-    private var _artists: MutableLiveData<ArrayList<Artist>> = MutableLiveData<ArrayList<Artist>>()
 
     private fun listenToSliceFiles() {
         firestore.collection("slice-entries").addSnapshotListener {
@@ -147,51 +145,6 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    private fun listenToMaterialTypes() {
-        firestore.collection("material-types").addSnapshotListener {
-                snapshot, e ->
-            if (e != null) {
-                Log.w(ContentValues.TAG, "Could not listen to Firebase")
-                return@addSnapshotListener
-            }
-
-            if (snapshot != null) {
-                val allMatTypes = ArrayList<MaterialType>()
-                val docs = snapshot.documents
-                docs.forEach {
-                    val matType = it.toObject(MaterialType::class.java)
-                    if (matType != null) {
-                        matType.id = it.id
-                        allMatTypes.add(matType)
-                    }
-                }
-                _materialTypes.value = allMatTypes
-            }
-        }
-    }
-
-    private fun listenToArtists() {
-        firestore.collection("artists").addSnapshotListener {
-                snapshot, e ->
-            if (e != null) {
-                Log.w(ContentValues.TAG, "Could not listen to Firebase")
-                return@addSnapshotListener
-            }
-
-            if (snapshot != null) {
-                val allArtists = ArrayList<Artist>()
-                val docs = snapshot.documents
-                docs.forEach {
-                    val artist = it.toObject(Artist::class.java)
-                    if (artist != null) {
-                        artist.id = it.id
-                        allArtists.add(artist)
-                    }
-                }
-                _artists.value = allArtists
-            }
-        }
-    }
 
     /**
      * Save
@@ -200,40 +153,38 @@ class MainViewModel : ViewModel() {
      * @param item: Object of variable type to be saved to Firebase
      * @author Aidan Kovacic
      * @return True if successfully saved
+     * Should be called in IO thread.
      */
-    internal fun <T: IData> save(item: T): Boolean {
 
+    internal suspend fun <T: IData> save(item: T): Boolean {
+        return try {
         // Assign the collection based on Data Type.
         val collection = when (item) {
             is SliceFile -> "slice-entries"
             is Artist -> "artists"
             is Model -> "models"
             is Material -> "materials"
-            is MaterialType -> "material-types"
             is Brand -> "brands"
             is Printer -> "printers"
             // This should theoretically not be able to be reached
             else -> return false
         }
 
-        val document =
-            if (item.id.isNotEmpty()) {
-                // Update existing collection
-                firestore.collection(collection).document(item.id)
-            } else {
-                // Create new collection
-                firestore.collection(collection).document()
-            }
-        item.id = document.id
-        val set = document.set(item)
-        set.addOnSuccessListener {
-            Log.d("Firebase", "Document Saved")
+            val document =
+                if (item.id.isNotEmpty()) {
+                    // Update existing collection
+                    firestore.collection(collection).document(item.id)
+                } else {
+                    // Create new collection
+                    firestore.collection(collection).document()
+                }
+            item.id = document.id
+            document.set(item).await()
+            true
+        } catch (e: Exception) {
+            false
+        }
 
-        }
-        set.addOnFailureListener {
-            Log.d("Firebase", "Save Failed")
-        }
-        return true
     }
 
 
@@ -257,12 +208,5 @@ class MainViewModel : ViewModel() {
         get() {return _materials}
         set(value) {_materials = value}
 
-    internal var materialTypes: MutableLiveData<ArrayList<MaterialType>>
-        get() {return _materialTypes}
-        set(value) {_materialTypes = value}
-
-    internal var artists: MutableLiveData<ArrayList<Artist>>
-        get() {return _artists}
-        set(value) {_artists = value}
 
 }

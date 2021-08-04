@@ -258,5 +258,4 @@
         tools:layout_editor_absoluteY="582dp"
         app:constraint_referenced_ids="filamentNozzleThickness, filamentEstimatedMaterial"
         android:visibility="invisible"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
