@@ -17,18 +17,10 @@ class MainViewModel : ViewModel() {
     init {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
         listenToSliceFiles()
-        listenToBrands()
-        listenToModels()
-        listenToPrinters()
-        listenToMaterials()
     }
 
 
     private var _sliceFiles: MutableLiveData<ArrayList<SliceFile>> = MutableLiveData<ArrayList<SliceFile>>()
-    private var _printers: MutableLiveData<ArrayList<Printer>> = MutableLiveData<ArrayList<Printer>>()
-    private var _models: MutableLiveData<ArrayList<Model>> = MutableLiveData<ArrayList<Model>>()
-    private var _brands: MutableLiveData<ArrayList<Brand>> = MutableLiveData<ArrayList<Brand>>()
-    private var _materials: MutableLiveData<ArrayList<Material>> = MutableLiveData<ArrayList<Material>>()
 
     private fun listenToSliceFiles() {
         firestore.collection("slice-entries").addSnapshotListener {
@@ -53,98 +45,6 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    private fun listenToPrinters() {
-        firestore.collection("printers").addSnapshotListener {
-                snapshot, e ->
-            if (e != null) {
-                Log.w(ContentValues.TAG, "Could not listen to Firebase")
-                return@addSnapshotListener
-            }
-
-            if (snapshot != null) {
-                val allPrinters = ArrayList<Printer>()
-                val docs = snapshot.documents
-                docs.forEach {
-                    val printer = it.toObject(Printer::class.java)
-                    if (printer != null) {
-                        printer.id = it.id
-                        allPrinters.add(printer)
-                    }
-                }
-                _printers.value = allPrinters
-            }
-        }
-    }
-
-    private fun listenToModels() {
-        firestore.collection("models").addSnapshotListener {
-                snapshot, e ->
-            if (e != null) {
-                Log.w(ContentValues.TAG, "Could not listen to Firebase")
-                return@addSnapshotListener
-            }
-
-            if (snapshot != null) {
-                val allModels = ArrayList<Model>()
-                val docs = snapshot.documents
-                docs.forEach {
-                    val model = it.toObject(Model::class.java)
-                    if (model != null) {
-                        model.id = it.id
-                        allModels.add(model)
-                    }
-                }
-                _models.value = allModels
-            }
-        }
-    }
-
-    private fun listenToBrands() {
-        firestore.collection("brands").addSnapshotListener {
-                snapshot, e ->
-            if (e != null) {
-                Log.w(ContentValues.TAG, "Could not listen to Firebase")
-                return@addSnapshotListener
-            }
-
-            if (snapshot != null) {
-                val allBrands = ArrayList<Brand>()
-                val docs = snapshot.documents
-                docs.forEach {
-                    val brand = it.toObject(Brand::class.java)
-                    if (brand != null) {
-                        brand.id = it.id
-                        allBrands.add(brand)
-                    }
-                }
-                _brands.value = allBrands
-            }
-        }
-    }
-
-    private fun listenToMaterials() {
-        firestore.collection("materials").addSnapshotListener {
-                snapshot, e ->
-            if (e != null) {
-                Log.w(ContentValues.TAG, "Could not listen to Firebase")
-                return@addSnapshotListener
-            }
-
-            if (snapshot != null) {
-                val allMats = ArrayList<Material>()
-                val docs = snapshot.documents
-                docs.forEach {
-                    val material = it.toObject(Material::class.java)
-                    if (material != null) {
-                        material.id = it.id
-                        allMats.add(material)
-                    }
-                }
-                _materials.value = allMats
-            }
-        }
-    }
-
 
     /**
      * Save
@@ -155,10 +55,10 @@ class MainViewModel : ViewModel() {
      * @return True if successfully saved
      * Should be called in IO thread.
      */
-
+// While we didn't end up using the robustness of this function, it is good for the future
     internal suspend fun <T: IData> save(item: T): Boolean {
         return try {
-        // Assign the collection based on Data Type.
+        // Assign the collection based on Data Type. (No longer used, but kept for future use)
         val collection = when (item) {
             is SliceFile -> "slice-entries"
             is Artist -> "artists"
@@ -191,22 +91,5 @@ class MainViewModel : ViewModel() {
     internal var sliceFiles: MutableLiveData<ArrayList<SliceFile>>
         get() {return _sliceFiles}
         set(value) {_sliceFiles = value}
-
-    internal var printers: MutableLiveData<ArrayList<Printer>>
-        get() {return _printers}
-        set(value) {_printers = value}
-
-    internal var models: MutableLiveData<ArrayList<Model>>
-        get() {return _models}
-        set(value) {_models = value}
-
-    internal var brands: MutableLiveData<ArrayList<Brand>>
-        get() {return _brands}
-        set(value) {_brands = value}
-
-    internal var materials: MutableLiveData<ArrayList<Material>>
-        get() {return _materials}
-        set(value) {_materials = value}
-
 
 }
