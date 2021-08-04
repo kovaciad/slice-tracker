@@ -16,9 +16,9 @@ import kotlinx.coroutines.*
 
 class MainFragment : Fragment() {
 
-    var selectedMaterialType = "Resin"
+    var selectedMaterialType = ""
     private lateinit var binding: MainFragmentBinding
-    var currentFilament = true
+    var currentFilament = false
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
