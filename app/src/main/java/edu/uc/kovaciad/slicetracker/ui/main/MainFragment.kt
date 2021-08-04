@@ -28,20 +28,20 @@ class MainFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-        // Hardcode the values of matTypeSpinner (see in strings.xml)
-        val matTypeSpinner = getView()?.findViewById<Spinner>(R.id.matTypeSpinner)
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.matTypeArray,
-            android.R.layout.simple_spinner_item
-        ).also {
-            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            if (matTypeSpinner != null) {
-                matTypeSpinner.adapter = it
-            }
-        }
+//        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+//
+//        // Hardcode the values of matTypeSpinner (see in strings.xml)
+//        val matTypeSpinner = getView()?.findViewById<Spinner>(R.id.matTypeSpinner)
+//        ArrayAdapter.createFromResource(
+//            requireContext(),
+//            R.array.matTypeArray,
+//            android.R.layout.simple_spinner_item
+//        ).also {
+//            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            if (matTypeSpinner != null) {
+//                matTypeSpinner.adapter = it
+//            }
+//        }
 
         super.onViewCreated(view, savedInstanceState)
     }

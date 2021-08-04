@@ -9,4 +9,254 @@
     android:layoutMode="opticalBounds"
     tools:context=".ui.main.MainFragment">
 
+    <Button
+        android:id="@+id/btnSaveTest"
+        android:layout_width="118dp"
+        android:layout_height="36dp"
+        android:text="Save Slice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/sliceFileName"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="50dp"
+        android:ems="9"
+        android:hint="Slice File Name"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/modelName"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:ems="9"
+        android:hint="Model Name"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sliceFileName" />
+
+    <EditText
+        android:id="@+id/artistName"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="5dp"
+        android:ems="9"
+        android:hint="Artist Name"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/printer" />
+
+    <EditText
+        android:id="@+id/numberOfLayers"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="244dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:hint="# of Layers"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/filamentNozzleEstimatedTime"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:hint="Estimated Time (s)"
+        android:inputType="numberDecimal"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filamentNozzleThickness" />
+
+    <EditText
+        android:id="@+id/filamentEstimatedMaterial"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:hint="Estimated Material"
+        android:inputType="numberDecimal"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filamentNozzleEstimatedTime" />
+
+    <EditText
+        android:id="@+id/filamentNozzleThickness"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:hint="Nozzle Thickness"
+        android:inputType="numberDecimal"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfLayers" />
+
+    <EditText
+        android:id="@+id/resinBaseLayers"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="244dp"
+        android:ems="10"
+        android:hint="Base Layers"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/resinLayerThickness"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Layer Thickness (nm)"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resinLayerCureTime" />
+
+    <EditText
+        android:id="@+id/resinLayerCureTime"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Layer Cure Time (s)"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resinBaseLayerCureTime" />
+
+    <EditText
+        android:id="@+id/resinBaseLayerCureTime"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:ems="9"
+        android:hint="Base Cure Time (s)"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resinBaseLayers" />
+
+    <EditText
+        android:id="@+id/resinLiftHeight"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="Lift Height (mm)"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resinLiftSpeed" />
+
+    <EditText
+        android:id="@+id/resinLiftSpeed"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Lift Speed (mm/s)"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resinLayerThickness" />
+
+    <EditText
+        android:id="@+id/resinRetractSpeed"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Retract Speed (mm/s)"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resinLiftHeight" />
+
+    <EditText
+        android:id="@+id/printer"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="5dp"
+        android:ems="9"
+        android:hint="Printer"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/material"
+        android:layout_width="393dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="174dp"
+        android:checkedButton="@id/resinRadio"
+        android:clipChildren="true"
+        android:layoutDirection="inherit"
+        android:layoutMode="opticalBounds"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/resinRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Resin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/filamentRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Filament"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </RadioGroup>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/resinGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="311dp"
+        tools:layout_editor_absoluteY="586dp"
+        app:constraint_referenced_ids="resinBaseLayerCureTime, resinBaseLayers, resinLayerCureTime,
+        resinLiftHeight, resinLiftSpeed, resinRetractSpeed, resinLayerThickness"
+        android:visibility="visible"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/filamentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="350dp"
+        tools:layout_editor_absoluteY="582dp"
+        app:constraint_referenced_ids="filamentNozzleThickness, filamentEstimatedMaterial"
+        android:visibility="invisible"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

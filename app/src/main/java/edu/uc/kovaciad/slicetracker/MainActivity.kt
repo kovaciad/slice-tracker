@@ -45,13 +45,6 @@ class MainActivity : AppCompatActivity() {
 
         detector = GestureDetectorCompat(this, SliceGestureListener())
 
-        
-        val resinRadioButton = findViewById<RadioButton>(R.id.resinRadio)
-        val filamentRadioButton = findViewById<RadioButton>(R.id.filamentRadio)
-
-        resinRadioButton.setOnClickListener { clickResin() }
-
-        filamentRadioButton.setOnClickListener { clickResin() }
 
     }
 
@@ -183,29 +176,5 @@ class MainActivity : AppCompatActivity() {
         // Reload options menu to reset options menu
         invalidateOptionsMenu()
     }
-    fun clickFilament() {
-        findViewById<View>(R.id.resinBaseLayers).visibility = View.INVISIBLE
-        findViewById<View>(R.id.resinBaseLayerCureTime).visibility = View.INVISIBLE
-        findViewById<View>(R.id.resinLayerCureTime).visibility = View.INVISIBLE
-        findViewById<View>(R.id.resinLayerThickness).visibility = View.INVISIBLE
-        findViewById<View>(R.id.resinLiftHeight).visibility = View.INVISIBLE
-        findViewById<View>(R.id.resinLiftSpeed).visibility = View.INVISIBLE
-        findViewById<View>(R.id.resinRetractSpeed).visibility = View.INVISIBLE
-        findViewById<View>(R.id.filamentEstimatedMaterial).visibility = View.VISIBLE
-        findViewById<View>(R.id.filamentNozzleEstimatedTime).visibility = View.VISIBLE
-        findViewById<View>(R.id.filamentNozzleThickness).visibility = View.VISIBLE
-    }
 
-    fun clickResin() {
-        findViewById<View>(R.id.resinBaseLayers).visibility = View.VISIBLE
-        findViewById<View>(R.id.resinBaseLayerCureTime).visibility = View.VISIBLE
-        findViewById<View>(R.id.resinLayerCureTime).visibility = View.VISIBLE
-        findViewById<View>(R.id.resinLayerThickness).visibility = View.VISIBLE
-        findViewById<View>(R.id.resinLiftHeight).visibility = View.VISIBLE
-        findViewById<View>(R.id.resinLiftSpeed).visibility = View.VISIBLE
-        findViewById<View>(R.id.resinRetractSpeed).visibility = View.VISIBLE
-        findViewById<View>(R.id.filamentEstimatedMaterial).visibility = View.INVISIBLE
-        findViewById<View>(R.id.filamentNozzleEstimatedTime).visibility = View.INVISIBLE
-        findViewById<View>(R.id.filamentNozzleThickness).visibility = View.INVISIBLE
-    }
 }
