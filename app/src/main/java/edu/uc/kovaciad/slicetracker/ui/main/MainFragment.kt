@@ -6,6 +6,9 @@ import android.view.*
 import android.widget.*
 import androidx.constraintlayout.widget.Group
 import androidx.core.text.isDigitsOnly
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import edu.uc.kovaciad.slicetracker.R
@@ -162,7 +165,6 @@ class MainFragment : Fragment() {
                     .show()
             }
         }
-
 
 
         super.onViewCreated(view, savedInstanceState)
