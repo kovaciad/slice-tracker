@@ -9,26 +9,14 @@
     android:layoutMode="opticalBounds"
     tools:context=".ui.main.MainFragment">
 
-    <Button
-        android:id="@+id/btnSaveTest"
-        android:layout_width="118dp"
-        android:layout_height="36dp"
-        android:text="Save Slice"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.532"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
     <EditText
-        android:id="@+id/sliceFileName"
+        android:id="@+id/sliceNameEntry"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="50dp"
         android:ems="9"
-        android:hint="Slice File Name"
+        android:hint="@string/sliceName"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,10 +28,10 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="32dp"
         android:ems="9"
-        android:hint="Model Name"
+        android:hint="@string/selectModel"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sliceFileName" />
+        app:layout_constraintTop_toBottomOf="@+id/sliceNameEntry" />
 
     <EditText
         android:id="@+id/artistName"
@@ -52,7 +40,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="5dp"
         android:ems="9"
-        android:hint="Artist Name"
+        android:hint="@string/artistName"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/printer" />
@@ -64,36 +52,10 @@
         android:layout_marginTop="244dp"
         android:layout_marginEnd="5dp"
         android:ems="10"
-        android:hint="# of Layers"
+        android:hint="@string/numLayers"
         android:inputType="number|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/filamentNozzleEstimatedTime"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="5dp"
-        android:ems="10"
-        android:hint="Estimated Time (s)"
-        android:inputType="numberDecimal"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filamentNozzleThickness" />
-
-    <EditText
-        android:id="@+id/filamentEstimatedMaterial"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="5dp"
-        android:ems="10"
-        android:hint="Estimated Material"
-        android:inputType="numberDecimal"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filamentNozzleEstimatedTime" />
 
     <EditText
         android:id="@+id/filamentNozzleThickness"
@@ -102,9 +64,35 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="5dp"
         android:ems="10"
-        android:hint="Nozzle Thickness"
+        android:hint="@string/filNozzleThic"
         android:inputType="numberDecimal"
         android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filamentEstimatedTime" />
+
+    <EditText
+        android:id="@+id/filamentEstimatedMaterial"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:hint="@string/filEstMat"
+        android:inputType="numberDecimal"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filamentNozzleThickness" />
+
+    <EditText
+        android:id="@+id/filamentEstimatedTime"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:hint="@string/filEstTime"
+        android:inputType="numberDecimal"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numberOfLayers" />
 
@@ -115,7 +103,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="244dp"
         android:ems="10"
-        android:hint="Base Layers"
+        android:hint="@string/resinBaseLayers"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -127,7 +115,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Layer Thickness (nm)"
+        android:hint="@string/resLayerThic"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resinLayerCureTime" />
@@ -139,7 +127,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Layer Cure Time (s)"
+        android:hint="@string/resCureTime"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resinBaseLayerCureTime" />
@@ -151,7 +139,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="32dp"
         android:ems="9"
-        android:hint="Base Cure Time (s)"
+        android:hint="@string/resinBaseCureTime"
         android:inputType="number|numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resinBaseLayers" />
@@ -163,7 +151,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="36dp"
         android:ems="10"
-        android:hint="Lift Height (mm)"
+        android:hint="@string/resinLiftHeight"
         android:inputType="number|numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resinLiftSpeed" />
@@ -175,7 +163,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="Lift Speed (mm/s)"
+        android:hint="@string/resinLiftSpeed"
         android:inputType="number|numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resinLayerThickness" />
@@ -187,7 +175,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="Retract Speed (mm/s)"
+        android:hint="@string/resinSpeed"
         android:inputType="number|numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resinLiftHeight" />
@@ -199,7 +187,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="5dp"
         android:ems="9"
-        android:hint="Printer"
+        android:hint="@string/printer"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -224,7 +212,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="Resin"
+            android:text="@string/resin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -234,7 +222,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="Filament"
+            android:text="@string/filament"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -244,18 +232,31 @@
         android:id="@+id/resinGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="311dp"
-        tools:layout_editor_absoluteY="586dp"
+        android:visibility="visible"
         app:constraint_referenced_ids="resinBaseLayerCureTime, resinBaseLayers, resinLayerCureTime,
         resinLiftHeight, resinLiftSpeed, resinRetractSpeed, resinLayerThickness"
-        android:visibility="visible"/>
+        tools:layout_editor_absoluteX="311dp"
+        tools:layout_editor_absoluteY="586dp" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/filamentGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="filamentEstimatedMaterial, filamentNozzleThickness"
         tools:layout_editor_absoluteX="350dp"
-        tools:layout_editor_absoluteY="582dp"
-        app:constraint_referenced_ids="filamentNozzleThickness, filamentEstimatedMaterial"
-        android:visibility="invisible"/>
+        tools:layout_editor_absoluteY="582dp" />
+
+    <ImageButton
+        android:id="@+id/saveButton"
+        android:layout_width="61dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/circle"
+        android:src="@android:drawable/ic_menu_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

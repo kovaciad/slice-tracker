@@ -6,9 +6,6 @@ import android.view.*
 import android.widget.*
 import androidx.constraintlayout.widget.Group
 import androidx.core.text.isDigitsOnly
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import edu.uc.kovaciad.slicetracker.R
@@ -19,7 +16,7 @@ import kotlinx.coroutines.*
 
 class MainFragment : Fragment() {
 
-    var selectedMaterialType = ""
+    var selectedMaterialType = "Resin"
     private lateinit var binding: MainFragmentBinding
     var currentFilament = true
     private val job = Job()
@@ -44,52 +41,40 @@ class MainFragment : Fragment() {
         // Bindings are a bit funky in that sometimes they just decide to not work and sometimes they do.
         binding = MainFragmentBinding.inflate(layoutInflater)
         // Hardcode the values of matTypeSpinner (see in strings.xml)
-        val matTypeSpinner = getView()?.findViewById<Spinner>(R.id.matTypeSpinner)
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.matTypeArray,
-            android.R.layout.simple_spinner_item
-        ).also {
-            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            matTypeSpinner!!.adapter = it
-        }
+        val matTypeButton = getView()?.findViewById<RadioGroup>(R.id.material)
 
-        matTypeSpinner!!.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                binding.resinGroup.visibility = View.INVISIBLE
-                binding.filamentGroup.visibility = View.INVISIBLE
+        matTypeButton!!.setOnCheckedChangeListener { group: RadioGroup, id: Int ->
+            selectedMaterialType = when (id) {
+                R.id.filamentRadio -> "Filament"
+                R.id.resinRadio -> "Resin"
+                else -> "Error"
             }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedMaterialType = parent!!.getItemAtPosition(position) as String
-                if (selectedMaterialType == "Resin") {
-                    Log.d("VISIBILITY", "RESIN SELECTED")
-                    // Resin selected, hide filament-related items
-                    if (currentFilament) {
-                        val resinGroup = getView()?.findViewById<Group>(R.id.resinGroup)
-                        val filGroup = getView()?.findViewById<Group>(R.id.filamentGroup)
-                        resinGroup!!.visibility = View.VISIBLE
-                        filGroup!!.visibility = View.INVISIBLE
-                        filGroup.invalidate()
-                        resinGroup.invalidate()
-                        currentFilament = false
-                    }
-                } else {
-                    Log.d("VISIBILITY", "FILAMENT SELECTED")
-                    // Filament mat-type selected, hide resin-related items
-                    if (!currentFilament) {
-                        val resinGroup = getView()?.findViewById<Group>(R.id.resinGroup)
-                        val filGroup = getView()?.findViewById<Group>(R.id.filamentGroup)
-                        resinGroup!!.visibility = View.INVISIBLE
-                        filGroup!!.visibility = View.VISIBLE
-                        filGroup.invalidate()
-                        resinGroup.invalidate()
-                        currentFilament = true
-                    }
-
+            if (selectedMaterialType == "Resin") {
+                Log.d("VISIBILITY", "RESIN SELECTED")
+                // Resin selected, hide filament-related items
+                if (currentFilament) {
+                    val resinGroup = getView()?.findViewById<Group>(R.id.resinGroup)
+                    val filGroup = getView()?.findViewById<Group>(R.id.filamentGroup)
+                    resinGroup!!.visibility = View.VISIBLE
+                    filGroup!!.visibility = View.INVISIBLE
+                    filGroup.invalidate()
+                    resinGroup.invalidate()
+                    currentFilament = false
                 }
-            }
+            } else {
+                Log.d("VISIBILITY", "FILAMENT SELECTED")
+                // Filament mat-type selected, hide resin-related items
+                if (!currentFilament) {
+                    val resinGroup = getView()?.findViewById<Group>(R.id.resinGroup)
+                    val filGroup = getView()?.findViewById<Group>(R.id.filamentGroup)
+                    resinGroup!!.visibility = View.INVISIBLE
+                    filGroup!!.visibility = View.VISIBLE
+                    filGroup.invalidate()
+                    resinGroup.invalidate()
+                    currentFilament = true
+                }
 
+            }
         }
 
         val saveButton = getView()?.findViewById<ImageButton>(R.id.saveButton)
@@ -111,12 +96,12 @@ class MainFragment : Fragment() {
                     if (filamentEstimatedMaterial!!.text.toString().isNotEmpty())
                         filamentEstimatedMaterial.text.toString().toDouble() else 0.0
                 val filamentEstimatedTime =
-                    getView()?.findViewById<TextView>(R.id.filamentEstimatedTime)
+                    getView()?.findViewById<TextView>(R.id.filamentNozzleThickness)
                 sliceFile.filamentNozzleEstimatedTime =
                     if (filamentEstimatedTime!!.text.toString().isNotEmpty())
                         filamentEstimatedTime.text.toString().toDouble() else 0.0
                 val filamentNozzleThickness =
-                    getView()?.findViewById<TextView>(R.id.filamentNozzleThickness)
+                    getView()?.findViewById<TextView>(R.id.filamentEstimatedTime)
                 sliceFile.filamentNozzleThickness =
                     if (filamentNozzleThickness!!.text.isNotEmpty())
                         filamentNozzleThickness.text.toString().toDouble() else 0.0
