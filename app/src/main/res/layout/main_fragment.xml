@@ -10,19 +10,6 @@
     tools:context=".ui.main.MainFragment">
 
     <EditText
-        android:id="@+id/sliceNameEntry"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="50dp"
-        android:ems="9"
-        android:hint="@string/sliceName"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
-
-    <EditText
         android:id="@+id/modelName"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
@@ -30,10 +17,10 @@
         android:layout_marginTop="32dp"
         android:ems="9"
         android:hint="@string/selectModel"
+        android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sliceNameEntry"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/sliceNameEntry" />
 
     <EditText
         android:id="@+id/artistName"
@@ -43,10 +30,10 @@
         android:layout_marginEnd="5dp"
         android:ems="9"
         android:hint="@string/artistName"
+        android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/printer"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/printer" />
 
     <EditText
         android:id="@+id/numberOfLayers"
@@ -56,10 +43,10 @@
         android:layout_marginEnd="5dp"
         android:ems="10"
         android:hint="@string/numLayers"
+        android:importantForAutofill="no"
         android:inputType="number|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/estimatedMaterial"
@@ -69,11 +56,11 @@
         android:layout_marginEnd="5dp"
         android:ems="10"
         android:hint="@string/filEstMat"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filamentEstimatedTime"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/filamentEstimatedTime" />
 
     <EditText
         android:id="@+id/filamentNozzleThickness"
@@ -83,11 +70,11 @@
         android:layout_marginEnd="5dp"
         android:ems="10"
         android:hint="@string/filNozzleThic"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/estimatedMaterial"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/estimatedMaterial" />
 
     <EditText
         android:id="@+id/filamentEstimatedTime"
@@ -97,11 +84,11 @@
         android:layout_marginEnd="5dp"
         android:ems="10"
         android:hint="@string/filEstTime"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberOfLayers"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/numberOfLayers" />
 
     <EditText
         android:id="@+id/resinBaseLayers"
@@ -111,10 +98,10 @@
         android:layout_marginTop="244dp"
         android:ems="10"
         android:hint="@string/resinBaseLayers"
+        android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/resinLayerThickness"
@@ -124,10 +111,10 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/resLayerThic"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resinLayerCureTime"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/resinLayerCureTime" />
 
     <EditText
         android:id="@+id/resinLayerCureTime"
@@ -137,10 +124,10 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/resCureTime"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resinBaseLayerCureTime"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/resinBaseLayerCureTime" />
 
     <EditText
         android:id="@+id/resinBaseLayerCureTime"
@@ -150,10 +137,10 @@
         android:layout_marginTop="32dp"
         android:ems="9"
         android:hint="@string/resinBaseCureTime"
+        android:importantForAutofill="no"
         android:inputType="number|numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resinBaseLayers"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/resinBaseLayers" />
 
     <EditText
         android:id="@+id/resinLiftHeight"
@@ -163,10 +150,10 @@
         android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="@string/resinLiftHeight"
+        android:importantForAutofill="no"
         android:inputType="number|numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resinLiftSpeed"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/resinLiftSpeed" />
 
     <EditText
         android:id="@+id/resinLiftSpeed"
@@ -176,10 +163,10 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/resinLiftSpeed"
+        android:importantForAutofill="no"
         android:inputType="number|numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resinLayerThickness"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/resinLayerThickness" />
 
     <EditText
         android:id="@+id/resinRetractSpeed"
@@ -189,10 +176,10 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/resinSpeed"
+        android:importantForAutofill="no"
         android:inputType="number|numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resinLiftHeight"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@+id/resinLiftHeight" />
 
     <EditText
         android:id="@+id/printer"
@@ -202,10 +189,10 @@
         android:layout_marginEnd="5dp"
         android:ems="9"
         android:hint="@string/printer"
+        android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/material"
@@ -274,5 +261,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/sliceNameEntry"
+        android:layout_width="181dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="48dp"
+        android:completionHint="@string/sliceName"
+        app:layout_constraintEnd_toEndOf="@+id/modelName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/modelName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spnSliceSelect"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

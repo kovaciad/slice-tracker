@@ -40,6 +40,6 @@ data class SliceFile (
     override var id: String = ""): IData
 {
     override fun toString(): String {
-        return "$sliceFileName | Time: $estimatedTime min | Material: $estimatedMaterial g or L"
+        return sliceFileName
     }
 }

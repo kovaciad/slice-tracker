@@ -8,7 +8,7 @@
     <string name="totalMats">Total Materials: %1$s g</string>
     <string name="resin">Resin</string>
     <string name="filament">Filament</string>
-
+    <string name="cancel">Cancel</string>
     <!-- main page -->
     <string name="resinBaseLayers">Resin Base Layer Cure Time (s)</string>
     <string name="baseCure">Base Cure</string>
