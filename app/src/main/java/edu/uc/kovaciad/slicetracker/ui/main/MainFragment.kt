@@ -1,33 +1,25 @@
 package edu.uc.kovaciad.slicetracker.ui.main
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.constraintlayout.widget.Group
 import androidx.core.text.isDigitsOnly
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import edu.uc.kovaciad.slicetracker.R
 import edu.uc.kovaciad.slicetracker.dto.SliceFile
 import kotlinx.coroutines.*
-import java.lang.IllegalStateException
 
 
-class MainFragment : Fragment(), NewSliceCreated {
+class MainFragment : Fragment() {
 
-    var selectedMaterialType = ""
-    var currentFilament = false
-    override val job = Job()
-    override val uiScope = CoroutineScope(Dispatchers.Main + job)
-    private var _sliceId = ""
-    private var selectedSlice: SliceFile = SliceFile()
+    private var selectedMaterialType = ""
+    private var currentFilament = false
+    private val job = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + job)
+    private var slice: SliceFile = SliceFile()
 
     companion object {
         fun newInstance() = MainFragment()
@@ -43,11 +35,15 @@ class MainFragment : Fragment(), NewSliceCreated {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
-    @SuppressLint("CutPasteId")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         // Bindings kept resulting in unpredictable behavior, so I did it this way
+
+        // Radio Buttons
         val matTypeButton = getView()?.findViewById<RadioGroup>(R.id.material)
+        val resinButton = getView()?.findViewById<RadioButton>(R.id.resinRadio)
+        val filamentButton = getView()?.findViewById<RadioButton>(R.id.filamentRadio)
+        // Text Entries
         val sliceNameEntry = getView()?.findViewById(R.id.sliceNameEntry) as AutoCompleteTextView
         val printerName = getView()?.findViewById<TextView>(R.id.printer)
         val modelName = getView()?.findViewById<TextView>(R.id.modelName)
@@ -63,9 +59,11 @@ class MainFragment : Fragment(), NewSliceCreated {
         val resinLayerCureTime = getView()?.findViewById<TextView>(R.id.resinLayerCureTime)
         val resinLiftSpeed = getView()?.findViewById<TextView>(R.id.resinLiftSpeed)
         val resinRetractSpeed = getView()?.findViewById<TextView>(R.id.resinRetractSpeed)
+        // Selector
+        val spnSliceSelect = getView()?.findViewById<Spinner>(R.id.spnSliceSelect)
 
         // Material Radio Buttons. Shows relevant fields for material.
-        matTypeButton!!.setOnCheckedChangeListener { group: RadioGroup, id: Int ->
+        matTypeButton!!.setOnCheckedChangeListener { _: RadioGroup, id: Int ->
             selectedMaterialType = when (id) {
                 R.id.filamentRadio -> "Filament"
                 R.id.resinRadio -> "Resin"
@@ -99,33 +97,51 @@ class MainFragment : Fragment(), NewSliceCreated {
             }
         }
 
-
-
-        viewModel.sliceFiles.observe(viewLifecycleOwner, Observer {
+        viewModel.sliceFiles.observe(viewLifecycleOwner, {
             slices -> sliceNameEntry.setAdapter(ArrayAdapter(requireContext(),
                     R.layout.support_simple_spinner_dropdown_item, slices))
         })
 
-        sliceNameEntry.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        viewModel.sliceFiles.observe(viewLifecycleOwner, {
+            slices -> spnSliceSelect!!.adapter = ArrayAdapter(requireContext(),
+                R.layout.support_simple_spinner_dropdown_item, slices)
+        })
+
+        spnSliceSelect!!.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                slice = parent?.getItemAtPosition(pos) as SliceFile
+                // Place all components into fields
+                sliceNameEntry.setText(slice.sliceFileName)
+                artistName!!.text = slice.artist
+                printerName!!.text = slice.printer
+                modelName!!.text = slice.model
+                numberOfLayers!!.text = slice.numberOfLayers.toString()
+                estimatedMaterial!!.text = slice.estimatedMaterial.toString()
+                estTime!!.text = slice.estimatedTime.toString()
+                if (slice.material == "Resin") {
+                    resinButton!!.isChecked = true
+                    filamentButton!!.isChecked = false
+
+                    resinBaseLayerCureTime!!.text = slice.resinBaseLayerCureTime.toString()
+                    resinBaseLayers!!.text = slice.resinBaseLayers.toString()
+                    resinLayerCureTime!!.text = slice.resinLayerCureTime.toString()
+                    resinLayerThickness!!.text = slice.resinLayerThickness.toString()
+                    resinLiftHeight!!.text = slice.resinLiftHeight.toString()
+                    resinLiftSpeed!!.text = slice.resinLiftSpeed.toString()
+                    resinRetractSpeed!!.text = slice.resinRetractSpeed.toString()
+                } else {
+                    resinButton!!.isChecked = false
+                    filamentButton!!.isChecked = true
+
+                    filamentNozzleThickness!!.text = slice.filamentNozzleThickness.toString()
+                }
+
+            }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                selectedSlice = SliceFile()
+                return // Nothing needs to be done
             }
 
-            /**
-             * Prexisting item selected from autocomplete list.
-             */
-            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                selectedSlice = parent!!.getItemAtPosition(pos) as SliceFile
-                _sliceId = selectedSlice.id
-            }
-        }
-
-        sliceNameEntry.setOnFocusChangeListener { view, hasFocus ->
-            val sliceEntered = sliceNameEntry.text.toString()
-            if (sliceEntered.isNotEmpty() && sliceEntered != selectedSlice.toString()) {
-                val newSliceDialogFragment = NewSliceDialogFragment(sliceEntered, this)
-                newSliceDialogFragment.show(parentFragmentManager, "New Slice")
-            }
         }
 
         // Logic for save button. Collects all relevant data and saves
@@ -135,7 +151,7 @@ class MainFragment : Fragment(), NewSliceCreated {
             // Save fields that apply to both filament and resin
             sliceFile.sliceFileName = sliceNameEntry.text.toString()
             sliceFile.printer = printerName!!.text.toString()
-            sliceFile.printer = modelName!!.text.toString()
+            sliceFile.model = modelName!!.text.toString()
             sliceFile.artist = artistName!!.text.toString()
             sliceFile.estimatedTime =
                 if (estTime!!.text.isNotEmpty())
@@ -146,7 +162,7 @@ class MainFragment : Fragment(), NewSliceCreated {
                 if (estimatedMaterial!!.text.toString().isNotEmpty())
                     estimatedMaterial.text.toString().toDouble() else 0.0
             sliceFile.material = selectedMaterialType
-            sliceFile.id = _sliceId
+            sliceFile.id = slice.id
 
             if (selectedMaterialType != "Resin" && sliceFile.sliceFileName.isNotEmpty()) {
                 // Filament only fields go here to be saved
@@ -186,7 +202,6 @@ class MainFragment : Fragment(), NewSliceCreated {
                     if (resinLiftSpeed!!.text.toString().isNotEmpty()
                         && resinLiftSpeed.text.toString().isDigitsOnly())
                             resinLiftSpeed.text.toString().toInt() else 0
-
                 sliceFile.resinRetractSpeed =
                     if (resinRetractSpeed!!.text.toString().isNotEmpty()
                         && resinRetractSpeed.text.toString().isDigitsOnly())
@@ -200,7 +215,6 @@ class MainFragment : Fragment(), NewSliceCreated {
             }
         }
 
-
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -208,7 +222,7 @@ class MainFragment : Fragment(), NewSliceCreated {
      * @param sliceFile SliceFile to be saved
      * Calls save in mvm and displays a toast
      */
-    override suspend fun saveSlice(sliceFile: SliceFile) {
+    private suspend fun saveSlice(sliceFile: SliceFile) {
         val saved: Boolean = viewModel.save(sliceFile)
         withContext(Dispatchers.Main) {
             if (saved) {
@@ -227,46 +241,6 @@ class MainFragment : Fragment(), NewSliceCreated {
         super.onDestroy()
     }
 
-    class NewSliceDialogFragment (private val sliceEntered: String, private val newSliceCreated: NewSliceCreated) : DialogFragment() {
-        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-            return activity?.let {
-                val builder = AlertDialog.Builder(it)
-                val inflater = requireActivity().layoutInflater
-                val newSliceView = inflater.inflate(R.layout.newslicedialog, null)
-                val sliceName = newSliceView.findViewById<EditText>(R.id.newSlice)
-                val estTime = newSliceView.findViewById<EditText>(R.id.newEstTime)
-                val estMats = newSliceView.findViewById<EditText>(R.id.newEstMat)
-                sliceName.setText(sliceEntered)
-                builder.setView(newSliceView)
-                    .setPositiveButton(getString(R.string.save)) { dialog, which ->
-                        val name = sliceName.text.toString()
-                        val time = if (estTime.text.isNotEmpty())
-                            estTime.text.toString().toDouble() else 0.0
-                        val mats = if (estMats.text.isNotEmpty())
-                            estMats.text.toString().toDouble() else 0.0
-                        val newSlice = SliceFile().apply {
-                            sliceFileName = name
-                            estimatedTime = time
-                            estimatedMaterial = mats
-                        }
-                        newSliceCreated.uiScope.launch {
-                            newSliceCreated.saveSlice(newSlice)
-                        }
-
-                    }
-                    .setNegativeButton(getString(R.string.cancel)) { dialog, which ->
-                        getDialog()?.cancel()
-                    }
-                builder.create()
-            } ?: throw IllegalStateException("Activity cannot be null")
-        }
-    }
 
 
-}
-
-interface NewSliceCreated {
-    val job: Job
-    val uiScope: CoroutineScope
-    suspend fun saveSlice(sliceFile: SliceFile)
 }
