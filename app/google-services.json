@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "656601127441-o8vqga2nvlmaj3uhh35qcolddk9sb9pu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.uc.kovaciad.slicetracker",
+            "certificate_hash": "8ae26c35eb95e6be05fa8676857377fb9e702a0c"
+          }
+        },
+        {
           "client_id": "656601127441-pah3tecfq97m7nghb5ef43lahnl3a8mp.apps.googleusercontent.com",
           "client_type": 3
         }

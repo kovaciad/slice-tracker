@@ -156,7 +156,8 @@ class MainActivity : AppCompatActivity() {
     // Sign into Firebase
     private fun createSignInIntent() {
         val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build()
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build()
         )
 
         val signInIntent = AuthUI.getInstance()
