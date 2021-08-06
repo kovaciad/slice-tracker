@@ -202,20 +202,24 @@ class MainFragment : SuperFragment(), DeleteObject {
         saveButton!!.setOnClickListener {
             val sliceFile = SliceFile()
             // Save fields that apply to both filament and resin
+            // We also check to ensure that users don't crash the app by using ridiculous numbers
             sliceFile.sliceFileName = sliceNameEntry.text.toString()
             sliceFile.printer = printerName!!.text.toString()
             sliceFile.model = modelName!!.text.toString()
             sliceFile.artist = artistName!!.text.toString()
 
             sliceFile.estimatedTime =
-                if (estTime!!.text.isNotEmpty())
+                if (estTime!!.text.isNotEmpty() &&
+                        estTime.text.toString().toDouble() < Double.MAX_VALUE)
                     estTime.text.toString().toDouble() else 0.0
 
-            sliceFile.numberOfLayers = if (numberOfLayers!!.text.toString().isNotEmpty())
+            sliceFile.numberOfLayers = if (numberOfLayers!!.text.toString().isNotEmpty() &&
+                    numberOfLayers.text.toString().toLong() <= Int.MAX_VALUE)
                 numberOfLayers.text.toString().toInt() else 0
 
             sliceFile.estimatedMaterial =
-                if (estimatedMaterial!!.text.toString().isNotEmpty())
+                if (estimatedMaterial!!.text.toString().isNotEmpty() &&
+                        estimatedMaterial.text.toString().toLong() <= Double.MAX_VALUE)
                     estimatedMaterial.text.toString().toDouble() else 0.0
 
             sliceFile.material = selectedMaterialType
@@ -225,7 +229,8 @@ class MainFragment : SuperFragment(), DeleteObject {
                         || sliceFile.sliceFileName != "")) { // This extra check is not actually redundant
                 // Filament only fields go here to be saved
                 sliceFile.filamentNozzleThickness =
-                    if (filamentNozzleThickness!!.text.toString().isNotEmpty())
+                    if (filamentNozzleThickness!!.text.toString().isNotEmpty() &&
+                            filamentNozzleThickness.text.toString().toLong() <= Double.MAX_VALUE)
                         filamentNozzleThickness.text.toString().toDouble() else 0.0
                 saveSlice(sliceFile)
             } else if (sliceFile.sliceFileName.isNotEmpty()){
@@ -233,35 +238,42 @@ class MainFragment : SuperFragment(), DeleteObject {
 
                 sliceFile.resinBaseLayerCureTime =
                     if (resinBaseLayerCureTime!!.text.toString().isNotEmpty() &&
-                        resinBaseLayerCureTime.text.toString().isDigitsOnly())
-                            resinBaseLayerCureTime.text.toString().toInt() else 0
+                            resinBaseLayerCureTime.text.toString().isDigitsOnly() &&
+                            resinBaseLayerCureTime.text.toString().toLong() <= Int.MAX_VALUE)
+                        resinBaseLayerCureTime.text.toString().toInt() else 0
 
                 sliceFile.resinBaseLayers =
-                    if (resinBaseLayers!!.text.toString().isNotEmpty()
-                        && resinBaseLayers.text.toString().isDigitsOnly())
-                            resinBaseLayers.text.toString().toInt() else 0
+                    if (resinBaseLayers!!.text.toString().isNotEmpty() &&
+                            resinBaseLayers.text.toString().isDigitsOnly() &&
+                            resinBaseLayers.text.toString().toLong() <= Int.MAX_VALUE)
+                        resinBaseLayers.text.toString().toInt() else 0
 
                 sliceFile.resinLayerThickness =
-                    if (resinLayerThickness!!.text.toString().isNotEmpty())
+                    if (resinLayerThickness!!.text.toString().isNotEmpty() &&
+                            resinLayerThickness.text.toString().toLong() <= Double.MAX_VALUE)
                         resinLayerThickness.text.toString().toDouble() else 0.0
 
                 sliceFile.resinLiftHeight =
-                    if (resinLiftHeight!!.text.isNotEmpty()
-                        && resinLiftHeight.text.isDigitsOnly())
+                    if (resinLiftHeight!!.text.isNotEmpty() &&
+                            resinLiftHeight.text.isDigitsOnly() &&
+                            resinLiftHeight.text.toString().toLong() <= Int.MAX_VALUE)
                             resinLiftHeight.text.toString().toInt() else 0
 
                 sliceFile.resinLayerCureTime =
-                    if (resinLayerCureTime!!.text.isNotEmpty())
+                    if (resinLayerCureTime!!.text.isNotEmpty() &&
+                            resinLayerCureTime.text.toString().toLong() <= Double.MAX_VALUE)
                         resinLayerCureTime.text.toString().toDouble() else 0.0
 
                 sliceFile.resinLiftSpeed =
-                    if (resinLiftSpeed!!.text.toString().isNotEmpty()
-                        && resinLiftSpeed.text.toString().isDigitsOnly())
-                            resinLiftSpeed.text.toString().toInt() else 0
+                    if (resinLiftSpeed!!.text.toString().isNotEmpty() &&
+                            resinLiftSpeed.text.toString().isDigitsOnly() &&
+                            resinLiftSpeed.text.toString().toLong() <= Int.MAX_VALUE)
+                        resinLiftSpeed.text.toString().toInt() else 0
                 sliceFile.resinRetractSpeed =
-                    if (resinRetractSpeed!!.text.toString().isNotEmpty()
-                        && resinRetractSpeed.text.toString().isDigitsOnly())
-                            resinRetractSpeed.text.toString().toInt() else 0
+                    if (resinRetractSpeed!!.text.toString().isNotEmpty() &&
+                            resinRetractSpeed.text.toString().isDigitsOnly() &&
+                            resinRetractSpeed.text.toString().toLong() <= Int.MAX_VALUE)
+                        resinRetractSpeed.text.toString().toInt() else 0
                 saveSlice(sliceFile)
 
             } else {
