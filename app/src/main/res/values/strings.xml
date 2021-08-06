@@ -9,6 +9,7 @@
     <string name="resin">Resin</string>
     <string name="filament">Filament</string>
     <string name="cancel">Cancel</string>
+    <string name="currentCity">Current City: %1$s</string>
     <!-- main page -->
     <string name="resinBaseLayers">Resin Base Layer Cure Time (s)</string>
     <string name="baseCure">Base Cure</string>
