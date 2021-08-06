@@ -1,5 +1,6 @@
 package edu.uc.kovaciad.slicetracker.ui.main
 
+import android.location.Geocoder
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import edu.uc.kovaciad.slicetracker.R
 import edu.uc.kovaciad.slicetracker.dto.SliceFile
 import kotlin.math.roundToLong
+import androidx.lifecycle.Observer
+
+public var currentCity = ""
+lateinit var applicationViewModel: ApplicationViewModel
 
 class OverviewFragment : SuperFragment() {
 
@@ -25,6 +30,19 @@ class OverviewFragment : SuperFragment() {
     ): View? {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.overview_fragment, container, false)
+    }
+    private fun requestLocationUpdates() {
+
+        applicationViewModel.getLocationLiveData().observe(this, Observer {
+            var latitudeValue: Double = it.latitude.toDouble()
+            var longitudeValue: Double = it.longitude.toDouble()
+            val geocoder = Geocoder(context)
+            val list = geocoder.getFromLocation(latitudeValue, longitudeValue, 1)
+
+            if (list[0].locality != null) {
+                currentCity = list[0].locality
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

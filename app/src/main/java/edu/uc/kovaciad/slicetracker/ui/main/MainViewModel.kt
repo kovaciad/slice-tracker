@@ -1,9 +1,12 @@
 package edu.uc.kovaciad.slicetracker.ui.main
 
 import android.content.ContentValues
+import android.location.Geocoder
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import com.google.api.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,6 +14,9 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings
 import edu.uc.kovaciad.slicetracker.dto.*
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
+
+
+
 
 class MainViewModel : ViewModel() {
     var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -47,6 +53,7 @@ class MainViewModel : ViewModel() {
             }
         }
     }
+
 
     /**
      * Start all listeners for data objects

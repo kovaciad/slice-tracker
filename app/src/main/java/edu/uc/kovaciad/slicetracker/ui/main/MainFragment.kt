@@ -365,6 +365,7 @@ class MainFragment : SuperFragment(), DeleteObject {
         fun newInstance() = MainFragment()
     }
 
+
 }
 
 /**
