@@ -14,9 +14,8 @@ import edu.uc.kovaciad.slicetracker.R
 import edu.uc.kovaciad.slicetracker.dto.SliceFile
 import kotlin.math.roundToLong
 
-class OverviewFragment : Fragment() {
+class OverviewFragment : SuperFragment() {
 
-    private lateinit var viewModel: MainViewModel
     private var totalPrintTime: Double = 0.0
     private var totalMats: Double = 0.0
 
@@ -30,7 +29,6 @@ class OverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         val actTotalPrintTime = getView()?.findViewById<TextView>(R.id.actTotalPrintTime)
         val actTotalMaterials = getView()?.findViewById<TextView>(R.id.actTotalMaterial)
         val rcySlices = getView()?.findViewById<RecyclerView>(R.id.rcySlices)

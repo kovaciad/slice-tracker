@@ -9,15 +9,13 @@ import android.widget.*
 import androidx.constraintlayout.widget.Group
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import edu.uc.kovaciad.slicetracker.R
 import edu.uc.kovaciad.slicetracker.dto.SliceFile
 import kotlinx.coroutines.*
 import java.lang.IllegalStateException
 
 
-class MainFragment : Fragment(), DeleteObject {
+class MainFragment : SuperFragment(), DeleteObject {
 
     private var selectedMaterialType = ""
     private var currentFilament = false
@@ -25,7 +23,6 @@ class MainFragment : Fragment(), DeleteObject {
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
     override var slice: SliceFile = SliceFile()
 
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +33,7 @@ class MainFragment : Fragment(), DeleteObject {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         // Bindings kept resulting in unpredictable behavior, so I did it this way
-
         // Radio Buttons
         val matTypeButton = getView()?.findViewById<RadioGroup>(R.id.material)
         val resinButton = getView()?.findViewById<RadioButton>(R.id.resinRadio)
