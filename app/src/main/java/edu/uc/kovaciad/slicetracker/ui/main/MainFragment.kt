@@ -209,8 +209,7 @@ class MainFragment : SuperFragment(), DeleteObject {
             sliceFile.artist = artistName!!.text.toString()
 
             sliceFile.estimatedTime =
-                if (estTime!!.text.isNotEmpty() &&
-                        estTime.text.toString().toDouble() < Double.MAX_VALUE)
+                if (estTime!!.text.isNotEmpty())
                     estTime.text.toString().toDouble() else 0.0
 
             sliceFile.numberOfLayers = if (numberOfLayers!!.text.toString().isNotEmpty() &&
@@ -218,8 +217,7 @@ class MainFragment : SuperFragment(), DeleteObject {
                 numberOfLayers.text.toString().toInt() else 0
 
             sliceFile.estimatedMaterial =
-                if (estimatedMaterial!!.text.toString().isNotEmpty() &&
-                        estimatedMaterial.text.toString().toLong() <= Double.MAX_VALUE)
+                if (estimatedMaterial!!.text.toString().isNotEmpty())
                     estimatedMaterial.text.toString().toDouble() else 0.0
 
             sliceFile.material = selectedMaterialType
@@ -229,8 +227,7 @@ class MainFragment : SuperFragment(), DeleteObject {
                         || sliceFile.sliceFileName != "")) { // This extra check is not actually redundant
                 // Filament only fields go here to be saved
                 sliceFile.filamentNozzleThickness =
-                    if (filamentNozzleThickness!!.text.toString().isNotEmpty() &&
-                            filamentNozzleThickness.text.toString().toLong() <= Double.MAX_VALUE)
+                    if (filamentNozzleThickness!!.text.toString().isNotEmpty())
                         filamentNozzleThickness.text.toString().toDouble() else 0.0
                 saveSlice(sliceFile)
             } else if (sliceFile.sliceFileName.isNotEmpty()){
@@ -249,8 +246,7 @@ class MainFragment : SuperFragment(), DeleteObject {
                         resinBaseLayers.text.toString().toInt() else 0
 
                 sliceFile.resinLayerThickness =
-                    if (resinLayerThickness!!.text.toString().isNotEmpty() &&
-                            resinLayerThickness.text.toString().toLong() <= Double.MAX_VALUE)
+                    if (resinLayerThickness!!.text.toString().isNotEmpty())
                         resinLayerThickness.text.toString().toDouble() else 0.0
 
                 sliceFile.resinLiftHeight =
@@ -260,8 +256,7 @@ class MainFragment : SuperFragment(), DeleteObject {
                             resinLiftHeight.text.toString().toInt() else 0
 
                 sliceFile.resinLayerCureTime =
-                    if (resinLayerCureTime!!.text.isNotEmpty() &&
-                            resinLayerCureTime.text.toString().toLong() <= Double.MAX_VALUE)
+                    if (resinLayerCureTime!!.text.isNotEmpty())
                         resinLayerCureTime.text.toString().toDouble() else 0.0
 
                 sliceFile.resinLiftSpeed =
