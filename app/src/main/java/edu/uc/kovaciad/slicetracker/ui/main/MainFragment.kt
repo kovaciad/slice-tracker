@@ -118,29 +118,81 @@ class MainFragment : Fragment(), DeleteObject {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 slice = parent?.getItemAtPosition(pos) as SliceFile
                 // Place all components into fields
-                sliceNameEntry.setText(slice.sliceFileName)
-                artistName!!.text = slice.artist
-                printerName!!.text = slice.printer
-                modelName!!.text = slice.model
-                numberOfLayers!!.text = slice.numberOfLayers.toString()
-                estimatedMaterial!!.text = slice.estimatedMaterial.toString()
-                estTime!!.text = slice.estimatedTime.toString()
+                slice.let {
+                    sliceNameEntry.setText(it.sliceFileName)
+                    artistName!!.text = it.artist
+                    printerName!!.text = it.printer
+                    modelName!!.text = it.model
+                    if (it.numberOfLayers.toString().toInt() != 0) {
+                        numberOfLayers!!.text = it.numberOfLayers.toString()
+                    } else {
+                        numberOfLayers!!.text = null
+                    }
+                    if (it.estimatedMaterial.toString().toDouble() != 0.0) {
+                        estimatedMaterial!!.text = it.estimatedMaterial.toString()
+                    } else {
+                        estimatedMaterial!!.text = null
+                    }
+                    if (it.estimatedTime.toString().toDouble() != 0.0) {
+                        estTime!!.text = it.estimatedTime.toString()
+                    } else {
+                        estTime!!.text = null
+                    }
+                }
+
                 if (slice.material == "Resin") {
+                    // Material Type of selected file is Resin
                     resinButton!!.isChecked = true
                     filamentButton!!.isChecked = false
+                    // Autofill fields, but only if the value isn't zero
+                    slice.let {
+                        if (it.resinBaseLayerCureTime.toString().toDouble() != 0.0) {
+                            resinBaseLayerCureTime!!.text = it.resinBaseLayerCureTime.toString()
+                        } else {
+                            resinBaseLayerCureTime!!.text = null
+                        }
+                        if (it.resinBaseLayers.toString().toDouble() != 0.0) {
+                            resinBaseLayers!!.text = it.resinBaseLayers.toString()
+                        } else {
+                            resinBaseLayers!!.text = null
+                        }
+                        if (it.resinLayerCureTime.toString().toDouble() != 0.0) {
+                            resinLayerCureTime!!.text = it.resinLayerCureTime.toString()
+                        } else {
+                            resinLayerCureTime!!.text = null
+                        }
+                        if (it.resinLayerThickness.toString().toDouble() != 0.0) {
+                            resinLayerThickness!!.text = it.resinLayerThickness.toString()
+                        } else {
+                            resinLayerThickness!!.text = null
+                        }
+                        if (it.resinLiftHeight.toString().toDouble() != 0.0) {
+                            resinLiftHeight!!.text = it.resinLiftHeight.toString()
+                        } else {
+                            resinLiftHeight!!.text = null
+                        }
+                        if (it.resinLiftSpeed.toString().toDouble() != 0.0) {
+                            resinLiftSpeed!!.text = it.resinLiftSpeed.toString()
+                        } else {
+                            resinLiftSpeed!!.text = null
+                        }
+                        if (it.resinRetractSpeed.toString().toDouble() != 0.0) {
+                            resinRetractSpeed!!.text = it.resinRetractSpeed.toString()
+                        } else {
+                            resinRetractSpeed!!.text = null
+                        }
+                    }
 
-                    resinBaseLayerCureTime!!.text = slice.resinBaseLayerCureTime.toString()
-                    resinBaseLayers!!.text = slice.resinBaseLayers.toString()
-                    resinLayerCureTime!!.text = slice.resinLayerCureTime.toString()
-                    resinLayerThickness!!.text = slice.resinLayerThickness.toString()
-                    resinLiftHeight!!.text = slice.resinLiftHeight.toString()
-                    resinLiftSpeed!!.text = slice.resinLiftSpeed.toString()
-                    resinRetractSpeed!!.text = slice.resinRetractSpeed.toString()
                 } else {
+                    // Material Type of selected file is Filament
                     resinButton!!.isChecked = false
                     filamentButton!!.isChecked = true
 
-                    filamentNozzleThickness!!.text = slice.filamentNozzleThickness.toString()
+                    if (slice.filamentNozzleThickness.toString().toDouble() != 0.0) {
+                        filamentNozzleThickness!!.text = slice.filamentNozzleThickness.toString()
+                    } else {
+                        filamentNozzleThickness!!.text = null
+                    }
                 }
 
             }
