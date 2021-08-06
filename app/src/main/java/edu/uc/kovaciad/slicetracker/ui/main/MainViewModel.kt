@@ -22,6 +22,9 @@ class MainViewModel : ViewModel() {
 
     private var _sliceFiles: MutableLiveData<ArrayList<SliceFile>> = MutableLiveData<ArrayList<SliceFile>>()
 
+    /**
+     * Called when initializing only. Starts firebase listening for slicefiles
+     */
     private fun listenToSliceFiles() {
         firestore.collection("slice-entries").addSnapshotListener {
                 snapshot, e ->
@@ -87,11 +90,34 @@ class MainViewModel : ViewModel() {
 
     }
 
+    /**
+     * Deletes whatever data object is passed from Firebase.
+     * @param item: item to be deleted. Must extend IData
+     * @author Aidan Kovacic
+     * @return True if object successfully deleted.
+     */
+    internal suspend fun <T:IData> delete(item:T): Boolean {
+        return try {
+            val collection = when (item) {
+                is SliceFile -> "slice-entries"
+                is Artist -> "artists"
+                is Model -> "models"
+                is Material -> "materials"
+                is Brand -> "brands"
+                is Printer -> "printers"
+                // This should theoretically not be able to be reached
+                else -> return false
+            }
+            val doc = firestore.collection(collection).document(item.id)
+            doc.delete().await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
 
     internal var sliceFiles: MutableLiveData<ArrayList<SliceFile>>
         get() {return _sliceFiles}
         set(value) {_sliceFiles = value}
-
-
 
 }

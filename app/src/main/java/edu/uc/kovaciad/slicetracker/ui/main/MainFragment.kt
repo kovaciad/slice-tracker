@@ -1,25 +1,30 @@
 package edu.uc.kovaciad.slicetracker.ui.main
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.constraintlayout.widget.Group
 import androidx.core.text.isDigitsOnly
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import edu.uc.kovaciad.slicetracker.R
 import edu.uc.kovaciad.slicetracker.dto.SliceFile
 import kotlinx.coroutines.*
+import java.lang.IllegalStateException
 
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), DeleteObject {
 
     private var selectedMaterialType = ""
     private var currentFilament = false
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
-    private var slice: SliceFile = SliceFile()
+    override var slice: SliceFile = SliceFile()
 
     companion object {
         fun newInstance() = MainFragment()
@@ -61,6 +66,9 @@ class MainFragment : Fragment() {
         val resinRetractSpeed = getView()?.findViewById<TextView>(R.id.resinRetractSpeed)
         // Selector
         val spnSliceSelect = getView()?.findViewById<Spinner>(R.id.spnSliceSelect)
+        // Buttons
+        val saveButton = getView()?.findViewById<ImageButton>(R.id.saveButton)
+        val delButton = getView()?.findViewById<ImageButton>(R.id.deleteButton)
 
         // Material Radio Buttons. Shows relevant fields for material.
         matTypeButton!!.setOnCheckedChangeListener { _: RadioGroup, id: Int ->
@@ -145,7 +153,6 @@ class MainFragment : Fragment() {
         }
 
         // Logic for save button. Collects all relevant data and saves
-        val saveButton = getView()?.findViewById<ImageButton>(R.id.saveButton)
         saveButton!!.setOnClickListener {
             val sliceFile = SliceFile()
             // Save fields that apply to both filament and resin
@@ -153,14 +160,18 @@ class MainFragment : Fragment() {
             sliceFile.printer = printerName!!.text.toString()
             sliceFile.model = modelName!!.text.toString()
             sliceFile.artist = artistName!!.text.toString()
+
             sliceFile.estimatedTime =
                 if (estTime!!.text.isNotEmpty())
                     estTime.text.toString().toDouble() else 0.0
+
             sliceFile.numberOfLayers = if (numberOfLayers!!.text.toString().isNotEmpty())
                 numberOfLayers.text.toString().toInt() else 0
+
             sliceFile.estimatedMaterial =
                 if (estimatedMaterial!!.text.toString().isNotEmpty())
                     estimatedMaterial.text.toString().toDouble() else 0.0
+
             sliceFile.material = selectedMaterialType
             sliceFile.id = slice.id
 
@@ -169,9 +180,7 @@ class MainFragment : Fragment() {
                 sliceFile.filamentNozzleThickness =
                     if (filamentNozzleThickness!!.text.toString().isNotEmpty())
                         filamentNozzleThickness.text.toString().toDouble() else 0.0
-                uiScope.launch(Dispatchers.IO) {
-                    saveSlice(sliceFile)
-                }
+                saveSlice(sliceFile)
             } else if (sliceFile.sliceFileName.isNotEmpty()){
                 // Resin only fields go here to be saved
 
@@ -206,12 +215,18 @@ class MainFragment : Fragment() {
                     if (resinRetractSpeed!!.text.toString().isNotEmpty()
                         && resinRetractSpeed.text.toString().isDigitsOnly())
                             resinRetractSpeed.text.toString().toInt() else 0
-                uiScope.launch(Dispatchers.IO) {
-                    saveSlice(sliceFile)
-                }
+                saveSlice(sliceFile)
+
             } else {
                 Toast.makeText(context, "No Slice File Selected!", Toast.LENGTH_LONG)
                     .show()
+            }
+        }
+
+        delButton!!.setOnClickListener {
+            if (slice.id != "") {
+                val delDialogFragment = DeleteConfirmationFragment(slice, this)
+                delDialogFragment.show(parentFragmentManager, "Delete Plant")
             }
         }
 
@@ -219,21 +234,46 @@ class MainFragment : Fragment() {
     }
 
     /**
-     * @param sliceFile SliceFile to be saved
-     * Calls save in mvm and displays a toast
+     * @param sliceFile: SliceFile to be saved
+     * Saves passed slice and displays a toast telling the user if it succeeded
      */
-    private suspend fun saveSlice(sliceFile: SliceFile) {
-        val saved: Boolean = viewModel.save(sliceFile)
-        withContext(Dispatchers.Main) {
-            if (saved) {
-                Toast.makeText(context, "${sliceFile.sliceFileName} saved!", Toast.LENGTH_SHORT)
-                    .show()
-            } else {
-                Toast.makeText(context, "${sliceFile.sliceFileName} not saved. :(", Toast.LENGTH_SHORT)
-                    .show()
+    private fun saveSlice(sliceFile: SliceFile) {
+        uiScope.launch {
+            val saved: Boolean = viewModel.save(sliceFile)
+            withContext(Dispatchers.Main) {
+                if (saved) {
+                    Toast.makeText(context, "${sliceFile.sliceFileName} saved!",
+                        Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    Toast.makeText(context, "${sliceFile.sliceFileName} not saved. :(",
+                        Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
 
+    }
+
+    /**
+     * @param sliceFile: SliceFile to be deleted
+     * Deletes slice and displays a toast telling the user if it succeeded
+     */
+    override fun deleteSlice(sliceFile: SliceFile) {
+        uiScope.launch {
+            val deleted = viewModel.delete(sliceFile)
+            withContext(Dispatchers.Main) {
+                if (deleted) {
+                    Toast.makeText(context, "${sliceFile.sliceFileName} deleted!",
+                        Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    Toast.makeText(context, "${sliceFile.sliceFileName} not deleted. :(",
+                        Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
     }
 
     override fun onDestroy() {
@@ -241,6 +281,38 @@ class MainFragment : Fragment() {
         super.onDestroy()
     }
 
+    /**
+     * This fragment will create a dialog confirming whether the user wants to delete the
+     * currently selected sliceFile. If they click "DELETE", the slice will be irrevocably deleted
+     * @param sliceFile: Slice to be deleted
+     * @param objectDeleted: Calling Fragment which must contain a delete function
+     */
+    class DeleteConfirmationFragment(private val sliceFile: SliceFile,
+                                     private val objectDeleted: DeleteObject) : DialogFragment() {
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+            return activity?.let {
+                val builder = AlertDialog.Builder(it)
+                val inflater = requireActivity().layoutInflater
+                val delSliceView = inflater.inflate(R.layout.deleteslicedialog, null)
+                builder.setView(delSliceView)
+                    .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                        objectDeleted.deleteSlice(sliceFile)
+                        dialog?.cancel()
+                    }
+                    .setNegativeButton(getString(R.string.cancel)) { _, _ ->
+                        dialog?.cancel()
+                    }
+                builder.create()
+            } ?: throw IllegalStateException("Activity cannot be null")
+        }
+    }
 
+}
 
+/**
+ * Interface for object that calls a delete on a slice file
+ */
+interface DeleteObject {
+    var slice: SliceFile
+    fun deleteSlice(sliceFile: SliceFile)
 }

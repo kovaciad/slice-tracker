@@ -27,6 +27,10 @@
     <string name="selectModel">Model</string>
     <string name="artistName">Artist</string>
     <string name="resinBaseCureTime">Base Cure Time (s)</string>
+
+    <!-- Dialog -->
+    <string name="delSure">Are you sure you want to delete this slice?</string>
+    <string name="delete">Delete</string>
     <string-array name="matTypeArray">
         <item>PLA</item>
         <item>PLA+</item>
