@@ -14,18 +14,16 @@ import java.lang.Exception
 
 class MainViewModel : ViewModel() {
     var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private lateinit var firebaseUser: FirebaseUser
 
     init {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-        listenToSliceFiles()
+        createListeners()
     }
-
 
     private var _sliceFiles: MutableLiveData<ArrayList<SliceFile>> = MutableLiveData<ArrayList<SliceFile>>()
 
     /**
-     * Called when initializing only. Starts firebase listening for slicefiles
+     * Called when initializing only. Starts firebase listening for slice files
      */
     private fun listenToSliceFiles() {
         firestore.collection("slice-entries").addSnapshotListener {
@@ -48,6 +46,15 @@ class MainViewModel : ViewModel() {
                 _sliceFiles.value = allSlices
             }
         }
+    }
+
+    /**
+     * Start all listeners for data objects
+     * At the moment, we only have one, but if we were to expand upon this,
+     * this would increase readability by placing all generation in a single place.
+     */
+    private fun createListeners() {
+        listenToSliceFiles()
     }
 
     /**
@@ -96,6 +103,7 @@ class MainViewModel : ViewModel() {
      * @param item: item to be deleted. Must extend IData
      * @author Aidan Kovacic
      * @return True if object successfully deleted.
+     * Should be called in IO thread
      */
     internal suspend fun <T:IData> delete(item:T): Boolean {
         return try {
