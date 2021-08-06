@@ -6,11 +6,13 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.map
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import edu.uc.kovaciad.slicetracker.services.FirebaseUserLiveData
 import edu.uc.kovaciad.slicetracker.ui.main.MainFragment
 import edu.uc.kovaciad.slicetracker.ui.main.OverviewFragment
 import kotlin.math.abs
@@ -27,6 +29,18 @@ class MainActivity : AppCompatActivity() {
         FirebaseAuthUIActivityResultContract()
     ) { res ->
         this.onSignInResult(res)
+    }
+
+    private enum class AuthState {
+        AUTHENTICATED, NOTAUTHENTICATED
+    }
+
+    private val authState = FirebaseUserLiveData().map { user ->
+        if (user != null) {
+            AuthState.AUTHENTICATED
+        } else {
+            AuthState.NOTAUTHENTICATED
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,13 +129,15 @@ class MainActivity : AppCompatActivity() {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
         // Check to see if there is an account logged in to decide what to show
-        if (user != null) {
-            // User logged in
-            menu!!.findItem(R.id.loginButton).isVisible = false
-        } else {
-            // User not logged in
-            menu!!.findItem(R.id.signOutBtn).isVisible = false
-        }
+        authState.observe(this, { authState ->
+            if (authState == AuthState.AUTHENTICATED) {
+                menu!!.findItem(R.id.loginButton).isVisible = false
+                menu.findItem(R.id.signOutBtn).isVisible = true
+            } else {
+                menu!!.findItem(R.id.loginButton).isVisible = true
+                menu.findItem(R.id.signOutBtn).isVisible = false
+            }
+        })
         return true
     }
 
