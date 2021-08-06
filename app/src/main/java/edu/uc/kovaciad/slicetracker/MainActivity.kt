@@ -3,9 +3,6 @@ package edu.uc.kovaciad.slicetracker
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
@@ -16,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import edu.uc.kovaciad.slicetracker.ui.main.MainFragment
 import edu.uc.kovaciad.slicetracker.ui.main.OverviewFragment
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
 
@@ -70,9 +68,9 @@ class MainActivity : AppCompatActivity() {
             val diffX = moveEvent?.x?.minus(downEvent!!.x) ?: 0.0F
             val diffY = moveEvent?.y?.minus(downEvent!!.y) ?: 0.0F
 
-            return if (Math.abs(diffX) > Math.abs(diffY)) {
+            return if (abs(diffX) > abs(diffY)) {
                 // left or right
-                if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                if (abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                     if (diffX < 0) {
                         // Swipe left
                         this@MainActivity.onSwipeLeft()

@@ -2,7 +2,6 @@ package edu.uc.kovaciad.slicetracker.ui.main
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -25,10 +24,6 @@ class MainFragment : Fragment(), DeleteObject {
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
     override var slice: SliceFile = SliceFile()
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     private lateinit var viewModel: MainViewModel
 
@@ -111,10 +106,14 @@ class MainFragment : Fragment(), DeleteObject {
         })
 
         viewModel.sliceFiles.observe(viewLifecycleOwner, {
-            slices -> spnSliceSelect!!.adapter = ArrayAdapter(requireContext(),
+            slices ->
+            // Add a blank default value to top of array
+            slices.add(0, SliceFile())
+            spnSliceSelect!!.adapter = ArrayAdapter(requireContext(),
                 R.layout.support_simple_spinner_dropdown_item, slices)
         })
 
+        // The spinner at the top that allows editing/deleting of existing slices
         spnSliceSelect!!.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 slice = parent?.getItemAtPosition(pos) as SliceFile
@@ -175,7 +174,8 @@ class MainFragment : Fragment(), DeleteObject {
             sliceFile.material = selectedMaterialType
             sliceFile.id = slice.id
 
-            if (selectedMaterialType != "Resin" && sliceFile.sliceFileName.isNotEmpty()) {
+            if (selectedMaterialType != "Resin" && (sliceFile.sliceFileName.isNotEmpty()
+                        || sliceFile.sliceFileName != "")) { // This extra check is not actually redundant
                 // Filament only fields go here to be saved
                 sliceFile.filamentNozzleThickness =
                     if (filamentNozzleThickness!!.text.toString().isNotEmpty())
@@ -305,6 +305,10 @@ class MainFragment : Fragment(), DeleteObject {
                 builder.create()
             } ?: throw IllegalStateException("Activity cannot be null")
         }
+    }
+
+    companion object {
+        fun newInstance() = MainFragment()
     }
 
 }

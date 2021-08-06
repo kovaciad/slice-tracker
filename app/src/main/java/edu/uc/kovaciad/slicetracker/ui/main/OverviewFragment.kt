@@ -16,10 +16,6 @@ import kotlin.math.roundToLong
 
 class OverviewFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = OverviewFragment()
-    }
-
     private lateinit var viewModel: MainViewModel
     private var totalPrintTime: Double = 0.0
     private var totalMats: Double = 0.0
@@ -77,7 +73,7 @@ class OverviewFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: SliceViewHolder, position: Int) {
-            val slice = slices.get(position)
+            val slice = slices[position]
             holder.updateSlices(slice)
         }
 
@@ -100,6 +96,10 @@ class OverviewFragment : Fragment() {
             lblMats.text = String.format(res.getString(R.string.totalMats),
                 sliceFile.estimatedMaterial.toString())
         }
+    }
+
+    companion object {
+        fun newInstance() = OverviewFragment()
     }
 
 }
